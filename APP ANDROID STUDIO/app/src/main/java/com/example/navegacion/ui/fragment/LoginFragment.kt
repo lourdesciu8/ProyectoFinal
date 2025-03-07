@@ -37,7 +37,7 @@ class LoginFragment : Fragment() { // Tiene que heredar de Fragment
                 // Obtener el valor seleccionado del Spinner
                 val seleccionado = parentView?.getItemAtPosition(position).toString()
 
-                // Aquí hay que agregar la lógica para "Alumno" o "Profesor"
+                // Aquí hay que agregar la lógica
                 when (seleccionado) {
                     "Alumno" -> {
                         // Lógica para Alumno: que se redirija hacia fragmet de Alumno

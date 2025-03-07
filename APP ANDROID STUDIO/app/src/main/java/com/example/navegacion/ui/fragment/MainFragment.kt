@@ -35,7 +35,7 @@ class MainFragment : Fragment () { //Tiene que heredar de Fragment
 
     override fun onStart() {
         super.onStart()
-        binding.textMain.setText("Iniciado como ${usuario?.correo ?: "Invitado"}")
+        binding.textMain.setText("Iniciado como ${usuario?.correo ?: "Usuario invitado"}")
         binding.btnVolver.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_loginFragment)
     }
