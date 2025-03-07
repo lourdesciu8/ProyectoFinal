@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_registro"
         android:id="@+id/registroFragment"
         android:name="com.example.navegacion.ui.fragment.RegistroFragment"
-        android:label="RegistroFragment" >
+        android:label="Registro" >
         <action
             android:id="@+id/action_registroFragment_to_mainFragment"
             app:destination="@id/mainFragment"
