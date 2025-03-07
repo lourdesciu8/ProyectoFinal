@@ -8,7 +8,7 @@
         tools:layout="@layout/fragment_login"
         android:id="@+id/loginFragment"
         android:name="com.example.navegacion.ui.fragment.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="Iniciar sesión" >
         <action
             android:id="@+id/action_loginFragment_to_mainFragment"
             app:destination="@id/mainFragment"
