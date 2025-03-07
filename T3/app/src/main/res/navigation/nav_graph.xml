@@ -8,7 +8,7 @@
         tools:layout="@layout/fragment_login"
         android:id="@+id/loginFragment"
         android:name="com.example.navegacion.ui.fragment.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="Iniciar sesión" >
         <action
             android:id="@+id/action_loginFragment_to_mainFragment"
             app:destination="@id/mainFragment"
@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_registro"
         android:id="@+id/registroFragment"
         android:name="com.example.navegacion.ui.fragment.RegistroFragment"
-        android:label="RegistroFragment" >
+        android:label="Registrar" >
         <action
             android:id="@+id/action_registroFragment_to_mainFragment"
             app:destination="@id/mainFragment"
