@@ -8,11 +8,16 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+<<<<<<< Updated upstream
                   <entry key="loginFragment">
+=======
+                  <entry key="calendarioFragment">
+>>>>>>> Stashed changes
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
+<<<<<<< Updated upstream
                             <option name="x" value="12" />
                             <option name="y" value="177" />
                           </Point>
@@ -35,10 +40,21 @@
                     </value>
                   </entry>
                   <entry key="mainFragment">
+=======
+                            <option name="x" value="251" />
+                            <option name="y" value="21" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="homeAlumnosFragment">
+>>>>>>> Stashed changes
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
+<<<<<<< Updated upstream
                             <option name="x" value="500" />
                             <option name="y" value="63" />
                           </Point>
@@ -73,6 +89,12 @@
                             </entry>
                           </map>
                         </option>
+=======
+                            <option name="x" value="40" />
+                            <option name="y" value="40" />
+                          </Point>
+                        </option>
+>>>>>>> Stashed changes
                       </LayoutPositions>
                     </value>
                   </entry>
