@@ -3,47 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/homeAlumnosFragment">
     <fragment
-        tools:layout="@layout/fragment_login"
-        android:id="@+id/loginFragment"
-        android:name="com.example.navegacion.ui.fragment.LoginFragment"
-        android:label="Iniciar sesión" >
+        android:id="@+id/homeAlumnosFragment"
+        android:name="com.example.navegacion.ui.fragment.HomeAlumnosFragment"
+        android:label="fragment_homealumnos"
+        tools:layout="@layout/fragment_homealumnos" >
         <action
-            android:id="@+id/action_loginFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
-        <action
-            android:id="@+id/action_loginFragment_to_registroFragment"
-            app:destination="@id/registroFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            android:id="@+id/action_homeAlumnosFragment_to_calendarioFragment"
+            app:destination="@id/calendarioFragment" />
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_registro"
-        android:id="@+id/registroFragment"
-        android:name="com.example.navegacion.ui.fragment.RegistroFragment"
-        android:label="Registro" >
-        <action
-            android:id="@+id/action_registroFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
-    </fragment>
-    <fragment
-        tools:layout="@layout/fragment_main"
-        android:id="@+id/mainFragment"
-        android:name="com.example.navegacion.ui.fragment.MainFragment"
-        android:label="MainFragment" >
-        <action
-            android:id="@+id/action_mainFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
-        <argument
-            android:name="Usuario"
-            app:argType="com.example.navegacion.ui.model.User"
-            app:nullable="true" />
-    </fragment>
+        android:id="@+id/calendarioFragment"
+        android:name="com.example.navegacion.ui.fragment.CalendarioFragment"
+        android:label="fragment_calendario"
+        tools:layout="@layout/fragment_calendario" />
+
 </navigation>

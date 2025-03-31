@@ -37,7 +37,7 @@ class MainFragment : Fragment () { //Tiene que heredar de Fragment
         super.onStart()
         binding.textMain.setText("Iniciado como ${usuario?.correo ?: "Invitado"}")
         binding.btnVolver.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_loginFragment)
+            findNavController()
     }
 }
 

@@ -57,7 +57,7 @@ class LoginFragment : Fragment () { //Tiene que heredar de Fragment
             val bundle=Bundle() //Para pasar a pantalla main el nombre del usuario iniciado
             val usuario= User(binding.editCorreo.text.toString(), binding.editPass.text.toString())
             bundle.putSerializable("usuario", usuario)
-            findNavController().navigate(R.id.action_loginFragment_to_mainFragment, bundle)
+            findNavController()
         }
         /*
         binding.btnRegistro.setOnClickListener {

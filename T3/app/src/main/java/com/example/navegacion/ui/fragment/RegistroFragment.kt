@@ -25,7 +25,7 @@ class RegistroFragment : Fragment () { //Tiene que heredar de Fragment
     override fun onStart() {
         super.onStart()
         binding.btnLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_registroFragment_to_mainFragment)
+            findNavController()
         }
     }
 }
