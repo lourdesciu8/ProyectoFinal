@@ -6,14 +6,29 @@
     android:gravity="center"
     android:padding="48dp">
 
+    <ImageView
+        android:id="@+id/logoApp2"
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/logo" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registro"
-        android:textSize="30sp"
-        android:layout_marginBottom="24dp"/>
+        android:textSize="24sp"
+        android:layout_marginBottom="20dp"/>
 
     <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editNombre"
+        android:hint="Introduce nombre"
+        android:gravity="center"/>
+
+    <EditText
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editCorreo"
@@ -26,14 +41,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/editPass"
         android:inputType="textPassword"
-        android:hint="Introduce pass"
+        android:hint="Introduce contraseña"
         android:gravity="center"/>
 
-    <Button
-        android:layout_marginTop="24dp"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnLogin"
-        android:text="Registrar"/>
+        android:backgroundTint="@color/colorApp"
+        android:text="REGISTRAR"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"/>
 
 </LinearLayout>

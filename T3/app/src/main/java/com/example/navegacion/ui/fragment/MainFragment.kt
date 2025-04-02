@@ -37,6 +37,7 @@ class MainFragment : Fragment () { //Tiene que heredar de Fragment
         binding=FragmentMainBinding.inflate(inflater,container,false)
         //Para sacar el identificar del user logeado
         Log.v("usuario", auth.currentUser!!.uid)
+
         //Poner botón de Cerrar Sesión (Pendiente de hacer)
         //auth.signOut()
         return binding.root
