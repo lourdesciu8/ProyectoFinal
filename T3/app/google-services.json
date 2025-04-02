@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "546423661670",
-    "project_id": "proyecto-d2172",
-    "storage_bucket": "proyecto-d2172.firebasestorage.app"
+    "project_number": "738175415373",
+    "project_id": "proyectofinal-75067",
+    "storage_bucket": "proyectofinal-75067.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:546423661670:android:d638d6961083171a4579a7",
+        "mobilesdk_app_id": "1:738175415373:android:4cd89726a290545aa15804",
         "android_client_info": {
           "package_name": "com.example.navegacion"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAHel-kKkGrQdY42OhtkAMNG7yTWiMrZuA"
+          "current_key": "AIzaSyA6uL-ggbimtzpNRxunYyi-08FH7NwPBK8"
         }
       ],
       "services": {
