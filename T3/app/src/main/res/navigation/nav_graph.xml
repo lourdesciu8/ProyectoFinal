@@ -35,9 +35,6 @@
         android:name="com.example.navegacion.ui.fragment.HomeAlumnoFragment"
         android:label="HomeAlumnoFragment" >
         <action
-            android:id="@+id/action_homeAlumnoFragment_to_calendarioAlumnoFragment"
-            app:destination="@id/calendarioAlumnoFragment" />
-        <action
             android:id="@+id/action_homeAlumnoFragment_to_calificacionesAlumnoFragmnet"
             app:destination="@id/calificacionesAlumnoFragmnet" />
         <action
