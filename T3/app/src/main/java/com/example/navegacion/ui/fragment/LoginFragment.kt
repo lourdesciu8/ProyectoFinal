@@ -51,6 +51,7 @@ class LoginFragment : Fragment () { //Tiene que heredar de Fragment
                 when (seleccionado) {
                     "Alumno" -> {
                         // Lógica para Alumno: que se redirija hacia fragmet de Alumno
+
                     }
                     "Profesor" -> {
                         // Lógica para Profesor: que se redirija hacia fragmet de Profesor

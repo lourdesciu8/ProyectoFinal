@@ -8,20 +8,20 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.navegacion.databinding.FragmentCalendarioBinding
+import com.example.navegacion.databinding.FragmentCalendarioalumnoBinding
 import com.example.navegacion.ui.adapter.EventosAdapter
 import com.example.navegacion.ui.viewmodel.CalendarioViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class CalendarioAlumnoFragment : Fragment() {
-    private var _binding: FragmentCalendarioBinding? = null
+    private var _binding: FragmentCalendarioalumnoBinding? = null
     private val binding get() = _binding!!
     private val calendarioViewModel: CalendarioViewModel by activityViewModels()
     private var selectedDate: Long = 0L
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentCalendarioBinding.inflate(inflater, container, false)
+        _binding = FragmentCalendarioalumnoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
