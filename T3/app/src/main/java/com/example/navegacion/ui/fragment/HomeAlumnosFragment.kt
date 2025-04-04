@@ -63,7 +63,7 @@ class HomeAlumnosFragment : Fragment() {
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.action_calendario -> {
-                    findNavController().navigate(R.id.calendarioFragment)
+                    findNavController().navigate(R.id)
                     true
                 }
                 else -> false
