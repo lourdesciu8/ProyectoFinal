@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_homeAlumnoFragment_to_progresoFragment"
             app:destination="@id/progresoFragment" />
+        <action
+            android:id="@+id/action_homeAlumnoFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeProfesorFragment"
@@ -60,6 +63,9 @@
         <action
             android:id="@+id/action_homeProfesorFragment_to_temarioProfesorFragment"
             app:destination="@id/temarioProfesorFragment" />
+        <action
+            android:id="@+id/action_homeProfesorFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/calendarioAlumnoFragment"
