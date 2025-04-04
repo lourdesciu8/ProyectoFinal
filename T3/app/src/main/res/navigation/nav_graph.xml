@@ -2,4 +2,125 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph" />
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        tools:layout="@layout/fragment_login"
+        android:id="@+id/loginFragment"
+        android:name="com.example.navegacion.ui.fragment.LoginFragment"
+        android:label="Iniciar sesión" >
+        <action
+            android:id="@+id/action_loginFragment_to_registroFragment"
+            app:destination="@id/registroFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeAlumnoFragment"
+            app:destination="@id/homeAlumnoFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeProfesorFragment"
+            app:destination="@id/homeProfesorFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_registro"
+        android:id="@+id/registroFragment"
+        android:name="com.example.navegacion.ui.fragment.RegistroFragment"
+        android:label="Registro" >
+        <action
+            android:id="@+id/action_registroFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeAlumnoFragment"
+        android:name="com.example.navegacion.ui.fragment.HomeAlumnoFragment"
+        android:label="HomeAlumnoFragment" >
+        <action
+            android:id="@+id/action_homeAlumnoFragment_to_calendarioAlumnoFragment"
+            app:destination="@id/calendarioAlumnoFragment" />
+        <action
+            android:id="@+id/action_homeAlumnoFragment_to_calificacionesAlumnoFragmnet"
+            app:destination="@id/calificacionesAlumnoFragmnet" />
+        <action
+            android:id="@+id/action_homeAlumnoFragment_to_temarioAlumnoFragment"
+            app:destination="@id/temarioAlumnoFragment" />
+        <action
+            android:id="@+id/action_homeAlumnoFragment_to_progresoFragment"
+            app:destination="@id/progresoFragment" />
+        <action
+            android:id="@+id/action_homeAlumnoFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeProfesorFragment"
+        android:name="com.example.navegacion.ui.fragment.HomeProfesorFragment"
+        android:label="HomeProfesorFragment" >
+        <action
+            android:id="@+id/action_homeProfesorFragment_to_calendarioProfesorFragment"
+            app:destination="@id/calendarioProfesorFragment" />
+        <action
+            android:id="@+id/action_homeProfesorFragment_to_calificacionesProfesorFragment"
+            app:destination="@id/calificacionesProfesorFragment" />
+        <action
+            android:id="@+id/action_homeProfesorFragment_to_temarioProfesorFragment"
+            app:destination="@id/temarioProfesorFragment" />
+        <action
+            android:id="@+id/action_homeProfesorFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calendarioAlumnoFragment"
+        android:name="com.example.navegacion.ui.fragment.CalendarioAlumnoFragment"
+        android:label="CalendarioAlumnoFragment" >
+        <action
+            android:id="@+id/action_calendarioAlumnoFragment_to_homeAlumnoFragment"
+            app:destination="@id/homeAlumnoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calificacionesAlumnoFragmnet"
+        android:name="com.example.navegacion.ui.fragment.CalificacionesAlumnoFragmnet"
+        android:label="CalificacionesAlumnoFragmnet" >
+        <action
+            android:id="@+id/action_calificacionesAlumnoFragmnet_to_homeAlumnoFragment"
+            app:destination="@id/homeAlumnoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/temarioAlumnoFragment"
+        android:name="com.example.navegacion.ui.fragment.TemarioAlumnoFragment"
+        android:label="TemarioAlumnoFragment" >
+        <action
+            android:id="@+id/action_temarioAlumnoFragment_to_homeAlumnoFragment"
+            app:destination="@id/homeAlumnoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/progresoFragment"
+        android:name="com.example.navegacion.ui.fragment.ProgresoFragment"
+        android:label="ProgresoFragment" >
+        <action
+            android:id="@+id/action_progresoFragment_to_homeAlumnoFragment"
+            app:destination="@id/homeAlumnoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calendarioProfesorFragment"
+        android:name="com.example.navegacion.ui.fragment.CalendarioProfesorFragment"
+        android:label="CalendarioProfesorFragment" >
+        <action
+            android:id="@+id/action_calendarioProfesorFragment_to_homeProfesorFragment"
+            app:destination="@id/homeProfesorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calificacionesProfesorFragment"
+        android:name="com.example.navegacion.ui.fragment.CalificacionesProfesorFragment"
+        android:label="CalificacionesProfesorFragment" >
+        <action
+            android:id="@+id/action_calificacionesProfesorFragment_to_homeProfesorFragment"
+            app:destination="@id/homeProfesorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/temarioProfesorFragment"
+        android:name="com.example.navegacion.ui.fragment.TemarioProfesorFragment"
+        android:label="TemarioProfesorFragment" >
+        <action
+            android:id="@+id/action_temarioProfesorFragment_to_homeProfesorFragment"
+            app:destination="@id/homeProfesorFragment" />
+    </fragment>
+</navigation>
