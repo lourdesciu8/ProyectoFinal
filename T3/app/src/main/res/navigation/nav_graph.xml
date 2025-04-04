@@ -2,21 +2,4 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/homeAlumnosFragment">
-    <fragment
-        android:id="@+id/homeAlumnosFragment"
-        android:name="com.example.navegacion.ui.fragment.HomeAlumnosFragment"
-        android:label="fragment_homealumnos"
-        tools:layout="@layout/fragment_homealumnos" >
-        <action
-            android:id="@+id/action_homeAlumnosFragment_to_calendarioFragment"
-            app:destination="@id/calendarioFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/calendarioFragment"
-        android:name="com.example.navegacion.ui.fragment.CalendarioFragment"
-        android:label="fragment_calendario"
-        tools:layout="@layout/fragment_calendario" />
-
-</navigation>
+    android:id="@+id/nav_graph" />
