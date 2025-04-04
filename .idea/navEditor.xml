@@ -8,11 +8,14 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+
                   <entry key="calendarioAlumnoFragment">
+
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
+
                             <option name="x" value="-375" />
                             <option name="y" value="775" />
                           </Point>
@@ -217,12 +220,15 @@
                     </value>
                   </entry>
                   <entry key="temarioProfesorFragment">
+
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
+
                             <option name="x" value="403" />
                             <option name="y" value="422" />
+
                           </Point>
                         </option>
                       </LayoutPositions>
