@@ -15,23 +15,24 @@ import com.example.navegacion.ui.model.User
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
-class LoginFragment : Fragment () { //Tiene que heredar de Fragment
+class LoginFragment : Fragment() {
+
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth: FirebaseAuth
 
-    //Inicializo el auth
+    // Inicializo auth
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        auth=FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
     }
 
-    //Unico metodo obligatorio:asocia parte gráfica y lógica
+    // Asocia parte gráfica (layout) con la lógica
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding=FragmentLoginBinding.inflate(inflater,container,false)
+    ): View {
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,50 +40,70 @@ class LoginFragment : Fragment () { //Tiene que heredar de Fragment
         super.onStart()
 
         // Configurar el Spinner
-        val spinner = binding.SpinnerId // Accedemos al Spinner por su ID
+        val spinner = binding.SpinnerId
 
-        // Establecer el OnItemSelectedListener para el Spinner
+        // (Opcional) OnItemSelectedListener si necesitas hacer algo al cambiar de selección
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
-                // Obtener el valor seleccionado del Spinner
+            override fun onItemSelected(
+                parentView: AdapterView<*>?,
+                selectedItemView: View?,
+                position: Int,
+                id: Long
+            ) {
                 val seleccionado = parentView?.getItemAtPosition(position).toString()
-
-                // Aquí hay que agregar la lógica para "Alumno" o "Profesor"
-                when (seleccionado) {
-                    "Alumno" -> {
-                        // Lógica para Alumno: que se redirija hacia fragmet de Alumno
-                    }
-                    "Profesor" -> {
-                        // Lógica para Profesor: que se redirija hacia fragmet de Profesor
-                    }
-                }
+                Log.d("LoginFragment", "Seleccionado: $seleccionado")
             }
-
             override fun onNothingSelected(parentView: AdapterView<*>?) {
                 // Lógica cuando no se selecciona nada (opcional)
             }
         }
 
-        /*binding.btnLogin.setOnClickListener {
-            auth.signInWithEmailAndPassword(
-                binding.editCorreo.text.toString(),binding.editPass.text.toString()
-            ).addOnCompleteListener {
-                if(it.isSuccessful){
-                    val bundle=Bundle() //Para pasar a pantalla main el nombre del usuario iniciado
-                    val usuario= User(binding.editCorreo.text.toString(), binding.editPass.text.toString())
-                    bundle.putSerializable("usuario", usuario)
-                    findNavController().navigate(R.id.action_loginFragment_to_mainFragment, bundle)
-                }else{
-                    Snackbar.make(binding.root, "Error en el registro", Snackbar.LENGTH_SHORT)
-                        .setAction("¿Quieres registrarte?"){findNavController().navigate(R.id.action_loginFragment_to_registroFragment)}
-                        .show()
+        // Botón Iniciar Sesión
+        binding.btnLogin.setOnClickListener {
+            val correo = binding.editCorreo.text.toString()
+            val pass = binding.editPass.text.toString()
+
+            auth.signInWithEmailAndPassword(correo, pass)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Aquí decides a qué fragment ir según la selección del Spinner
+                        val seleccionado = spinner.selectedItem.toString()
+
+                        // (Opcional) Para pasar datos al siguiente fragment
+                        val bundle = Bundle()
+                        val usuario = User(correo, pass)
+                        bundle.putSerializable("usuario", usuario)
+
+                        when (seleccionado) {
+                            "Alumno" -> {
+                                // Ir a Home Alumno
+                                findNavController().navigate(
+                                    R.id.action_loginFragment_to_homeAlumnoFragment,
+                                    bundle
+                                )
+                            }
+                            "Profesor" -> {
+                                // Ir a Home Profesor
+                                findNavController().navigate(
+                                    R.id.action_loginFragment_to_homeProfesorFragment,
+                                    bundle
+                                )
+                            }
+                        }
+                    } else {
+                        // Error al iniciar sesión
+                        Snackbar.make(binding.root, "Error al iniciar sesión", Snackbar.LENGTH_SHORT)
+                            .setAction("¿Quieres registrarte?") {
+                                findNavController().navigate(R.id.action_loginFragment_to_registroFragment)
+                            }
+                            .show()
+                    }
                 }
-            }
         }
 
+        // Botón Registro
         binding.btnRegistro.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registroFragment)
-        }*/
+        }
     }
-
 }

@@ -52,8 +52,8 @@ class RegistroFragment : Fragment () { //Tiene que heredar de Fragment
                             nombre = binding.editNombre.text.toString(),
                         )
                     )
-                    //Navegar hacia el mainFragment
-                   // findNavController().navigate(R.id.action_registroFragment_to_mainFragment)
+                    //Navegar hacia el login tras ser registrado
+                   findNavController().navigate(R.id.action_registroFragment_to_loginFragment)
                 } else {
                     Snackbar.make(binding.root, "Error en el registro, usuario registrado", Snackbar.LENGTH_SHORT)
                         .show()
