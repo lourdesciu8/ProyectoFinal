@@ -53,7 +53,7 @@ class RegistroFragment : Fragment () { //Tiene que heredar de Fragment
                         )
                     )
                     //Navegar hacia el mainFragment
-                    findNavController().navigate(R.id.action_registroFragment_to_mainFragment)
+                   // findNavController().navigate(R.id.action_registroFragment_to_mainFragment)
                 } else {
                     Snackbar.make(binding.root, "Error en el registro, usuario registrado", Snackbar.LENGTH_SHORT)
                         .show()

@@ -63,7 +63,7 @@ class LoginFragment : Fragment () { //Tiene que heredar de Fragment
             }
         }
 
-        binding.btnLogin.setOnClickListener {
+        /*binding.btnLogin.setOnClickListener {
             auth.signInWithEmailAndPassword(
                 binding.editCorreo.text.toString(),binding.editPass.text.toString()
             ).addOnCompleteListener {
@@ -82,7 +82,7 @@ class LoginFragment : Fragment () { //Tiene que heredar de Fragment
 
         binding.btnRegistro.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registroFragment)
-        }
+        }*/
     }
 
 }
