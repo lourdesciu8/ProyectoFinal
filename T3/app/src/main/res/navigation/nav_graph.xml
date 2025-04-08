@@ -19,7 +19,7 @@
             app:destination="@id/homeAlumnoFragment" />
         <action
             android:id="@+id/action_loginFragment_to_homeProfesorFragment"
-            app:destination="@id/homeProfesorFragment" />
+            app:destination="@+id/homeProfesorFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_registro"
@@ -34,9 +34,6 @@
         android:id="@+id/homeAlumnoFragment"
         android:name="com.example.navegacion.ui.fragment.HomeAlumnoFragment"
         android:label="HomeAlumnoFragment" >
-        <action
-            android:id="@+id/action_homeAlumnoFragment_to_calendarioAlumnoFragment"
-            app:destination="@id/calendarioAlumnoFragment" />
         <action
             android:id="@+id/action_homeAlumnoFragment_to_calificacionesAlumnoFragmnet"
             app:destination="@id/calificacionesAlumnoFragmnet" />

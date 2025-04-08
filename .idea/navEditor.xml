@@ -8,14 +8,11 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-
                   <entry key="calendarioAlumnoFragment">
-
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-
                             <option name="x" value="-375" />
                             <option name="y" value="775" />
                           </Point>
@@ -40,6 +37,15 @@
                             <option name="x" value="404" />
                             <option name="y" value="28" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_calendarioProfesorFragment_to_homeProfesorFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -74,6 +80,15 @@
                             <option name="y" value="259" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_calificacionesProfesorFragment_to_homeProfesorFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -88,12 +103,12 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_homeAlumnoFragment_to_calendarioAlumnoFragment">
+                            <entry key="action_homeAlumnoFragment_to_calificacionesAlumnoFragmnet">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_homeAlumnoFragment_to_calificacionesAlumnoFragmnet">
+                            <entry key="action_homeAlumnoFragment_to_loginFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -121,6 +136,30 @@
                             <option name="x" value="123" />
                             <option name="y" value="336" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_homeProfesorFragment_to_calendarioProfesorFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeProfesorFragment_to_calificacionesProfesorFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeProfesorFragment_to_loginFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeProfesorFragment_to_temarioProfesorFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -177,6 +216,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="pruebaFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-667" />
+                            <option name="y" value="-285" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="registroFragment">
                     <value>
                       <LayoutPositions>
@@ -220,16 +271,22 @@
                     </value>
                   </entry>
                   <entry key="temarioProfesorFragment">
-
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-
                             <option name="x" value="403" />
                             <option name="y" value="422" />
-
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_temarioProfesorFragment_to_homeProfesorFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
