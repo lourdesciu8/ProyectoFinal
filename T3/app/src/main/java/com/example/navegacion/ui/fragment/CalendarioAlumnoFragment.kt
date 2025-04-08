@@ -44,6 +44,11 @@ class CalendarioAlumnoFragment : Fragment() {
             Toast.makeText(requireContext(), "Evento añadido", Toast.LENGTH_SHORT).show()
         }
 
+        // modificado por Aaron boton para volver atras
+        binding.btnVolver.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
         actualizarListaEventos(adapter)
     }
 

@@ -13,7 +13,7 @@
         android:id="@+id/txtTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calendario"
+        android:text="Calendario/ALumno"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
@@ -51,5 +51,17 @@
         app:layout_constraintTop_toBottomOf="@id/btnAddEvent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:padding="8dp"/>
+    <!-- Botón para volver por Aaron -->
+    <ImageButton
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/flecha_volver"
+        android:background="@android:color/transparent"
+        android:contentDescription="Volver"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
