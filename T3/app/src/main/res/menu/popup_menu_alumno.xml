@@ -2,24 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
         <item
             android:id="@+id/action_calendario"
-            android:title="Calendario"
-             />
+            android:title="Calendario" />
 
         <item
             android:id="@+id/action_progreso"
-            android:title="Progreso"
-            />
+            android:title="Progreso" />
 
-    <item
+        <item
         android:id="@+id/action_temario"
-        android:title="Temario"
-        />
+        android:title="Temario" />
 
         <item
             android:id="@+id/action_calificaciones"
-            android:title="Calificaciones"
-             />
+            android:title="Calificaciones" />
 
+        <item
+        android:id="@+id/action_logout"
+        android:title="Cerrar sesión" />
 
-    </menu>
+</menu>
 

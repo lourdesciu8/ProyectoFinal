@@ -55,23 +55,40 @@ class HomeAlumnoFragment: Fragment() {
             }
         }
 
-        private fun showPopupMenu(view: View) {
-            val popupMenu = PopupMenu(requireContext(), view)
-            popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
+    private fun showPopupMenu(view: View) {
+        val popupMenu = PopupMenu(requireContext(), view)
+        popupMenu.menuInflater.inflate(R.menu.popup_menu_alumno, popupMenu.menu)
 
-            popupMenu.setOnMenuItemClickListener { item ->
-                when (item.itemId) {
-                    R.id.action_calendario -> {
-                        findNavController().navigate(R.id.calendarioAlumnoFragment)
-                        true
-                    }
-                    else -> false
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_calendario -> {
+                    findNavController().navigate(R.id.calendarioAlumnoFragment)
+                    true
                 }
+                R.id.action_progreso -> {
+                    findNavController().navigate(R.id.action_homeAlumnoFragment_to_progresoFragment)
+                    true
+                }
+                R.id.action_temario -> {
+                    findNavController().navigate(R.id.action_homeAlumnoFragment_to_temarioAlumnoFragment)
+                    true
+                }
+                R.id.action_calificaciones -> {
+                    findNavController().navigate(R.id.action_homeAlumnoFragment_to_calificacionesAlumnoFragmnet)
+                    true
+                }
+                R.id.action_logout -> {
+                    findNavController().navigate(R.id.loginFragment)
+                    true
+                }
+                else -> false
             }
-            popupMenu.show()
         }
+        popupMenu.show()
+    }
 
-        override fun onDestroyView() {
+
+    override fun onDestroyView() {
             super.onDestroyView()
             _binding = null
         }
