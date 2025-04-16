@@ -6,6 +6,8 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="default_web_client_id">738175415373-lufm7gg6l0ojbtsrshl8m12besh4vuaq.apps.googleusercontent.com</string>
+
 
     <string-array name="roles_array">
         <item>Alumno</item>

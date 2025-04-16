@@ -50,12 +50,13 @@ class RegistroFragment : Fragment () { //Tiene que heredar de Fragment
                         User(
                             correo = binding.editCorreo.text.toString(),
                             nombre = binding.editNombre.text.toString(),
+                            rol=binding.spinnerRol.selectedItem.toString()
                         )
                     )
                     //Navegar hacia el login tras ser registrado
                    findNavController().navigate(R.id.action_registroFragment_to_loginFragment)
                 } else {
-                    Snackbar.make(binding.root, "Error en el registro, usuario registrado", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(binding.root, "Error en el registro", Snackbar.LENGTH_SHORT)
                         .show()
                 }
             }

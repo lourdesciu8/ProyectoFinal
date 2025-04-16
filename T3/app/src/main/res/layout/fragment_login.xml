@@ -5,71 +5,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:padding="48dp">
+    android:padding="24dp">
 
     <ImageView
         android:id="@+id/logoApp"
-        android:layout_width="219dp"
-        android:layout_height="195dp"
+        android:layout_width="180dp"
+        android:layout_height="160dp"
         android:src="@drawable/logo"
-        android:layout_marginBottom="28dp"/>
+        android:layout_marginBottom="20dp"/>
 
     <EditText
+        android:id="@+id/editCorreo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editCorreo"
         android:hint="Introduce correo"
         android:gravity="center"/>
 
     <EditText
-        android:layout_marginTop="24dp"
+        android:id="@+id/editPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editPass"
         android:inputType="textPassword"
         android:hint="Introduce contraseña"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_marginTop="16dp"/>
 
     <TextView
+        android:id="@+id/txtOlvidasteContrasena"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:gravity="end"
         android:text="¿Has olvidado tu contraseña?"
         android:textColor="#3998a9" />
 
     <Spinner
+        android:id="@+id/SpinnerId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/SpinnerId"
         android:entries="@array/roles_array"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="12dp" />
 
-    <!-- Aquí ponemos un LinearLayout horizontal para los botones -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="24dp">
+        android:layout_marginTop="12dp">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="12dp"
             android:backgroundTint="@color/colorApp"
             android:text="INICIAR SESIÓN"
             android:textColor="@color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRegistro"
-            android:layout_width="wrap_content"
+            android:layout_width="121dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorApp"
             android:text="REGISTRO"
             android:textColor="@color/white" />
     </LinearLayout>
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btnGoogleSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"/>
 
 </LinearLayout>

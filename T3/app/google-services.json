@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "738175415373",
+    "firebase_url": "https://proyectofinal-75067-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "proyectofinal-75067",
     "storage_bucket": "proyectofinal-75067.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.navegacion"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "738175415373-82e2lh5hu3gkim0i77a5ivt9dobpeou9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.navegacion",
+            "certificate_hash": "2f42ed12abc025938a931644105f4cf60540beb3"
+          }
+        },
+        {
+          "client_id": "738175415373-lufm7gg6l0ojbtsrshl8m12besh4vuaq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA6uL-ggbimtzpNRxunYyi-08FH7NwPBK8"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738175415373-lufm7gg6l0ojbtsrshl8m12besh4vuaq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
