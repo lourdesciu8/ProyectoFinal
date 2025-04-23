@@ -112,6 +112,18 @@ class LoginFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        // Recupera correo y contraseña desde el Bundle del registro
+        val correoRecibido = arguments?.getString("correo")
+        val contrasenaRecibida = arguments?.getString("contrasena")
+
+        if (!correoRecibido.isNullOrEmpty()) {
+            binding.editCorreo.setText(correoRecibido)
+        }
+
+        if (!contrasenaRecibida.isNullOrEmpty()) {
+            binding.editPass.setText(contrasenaRecibida)
+        }
+
         // Spinner
         val spinner = binding.SpinnerId
 

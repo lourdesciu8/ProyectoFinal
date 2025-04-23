@@ -132,4 +132,15 @@
             android:id="@+id/action_recuperarContrasenaFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/soporteFragment"
+        android:name="com.example.navegacion.ui.fragment.SoporteFragment"
+        android:label="Soporte Técnico"
+        tools:layout="@layout/fragment_soporte" />
+
+    <!-- Acción global para navegar a Soporte desde cualquier punto -->
+    <action
+        android:id="@+id/action_global_soporteFragment"
+        app:destination="@id/soporteFragment" />
 </navigation>
