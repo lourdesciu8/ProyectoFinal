@@ -23,6 +23,9 @@ class TemarioAlumnoFragment : Fragment() {
     private lateinit var listaTemarios: MutableList<Temario>
     private lateinit var dbRef: DatabaseReference
     private lateinit var spinnerModulos: Spinner
+    private lateinit var recyclerExamenes: RecyclerView
+    private lateinit var examenAdapter: TemarioAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +37,11 @@ class TemarioAlumnoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        recyclerExamenes = view.findViewById(R.id.recyclerExamenes)
+        recyclerExamenes.layoutManager = LinearLayoutManager(requireContext())
+        examenAdapter = TemarioAdapter(mutableListOf())
+        recyclerExamenes.adapter = examenAdapter
 
         spinnerModulos = view.findViewById(R.id.spinnerModulos)
 
@@ -64,6 +72,7 @@ class TemarioAlumnoFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val moduloSeleccionado = parent.getItemAtPosition(position).toString()
                 cargarTemariosPorModulo(moduloSeleccionado)
+                cargarExamenesPorModulo(moduloSeleccionado)
             }
 
             // Filtrado de temarios por módulo seleccionado
@@ -104,4 +113,27 @@ class TemarioAlumnoFragment : Fragment() {
         adapter = TemarioAdapter(listaTemarios)
         recyclerView.adapter = adapter
     }
+
+    private fun cargarExamenesPorModulo(modulo: String) {
+        val dbRef = FirebaseDatabase.getInstance("https://proyectofinal-75067-default-rtdb.europe-west1.firebasedatabase.app")
+            .getReference("examenes")
+
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val listaExamenes = mutableListOf<Temario>()
+                for (snap in snapshot.children) {
+                    val examen = snap.getValue(Temario::class.java)
+                    if (examen != null && examen.modulo == modulo) {
+                        listaExamenes.add(examen)
+                    }
+                }
+                examenAdapter.actualizarLista(listaExamenes)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "Error al cargar exámenes", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
 }

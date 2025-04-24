@@ -38,7 +38,7 @@ class TemarioAdapter(
             it.context.startActivity(intent)
         }
 
-        // Mostrar u ocultar el botón de eliminar
+        // Mostrar u ocultar el botón de eliminar en funcion del rol
         holder.btnEliminar.visibility = if (esProfesor) View.VISIBLE else View.GONE
         holder.btnEliminar.setOnClickListener {
             onEliminarClick?.invoke(temario)
