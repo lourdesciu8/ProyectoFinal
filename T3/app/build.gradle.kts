@@ -40,6 +40,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.view)
+
 
     // Firebase Authentication
     implementation("com.google.firebase:firebase-auth-ktx")
@@ -57,6 +59,7 @@ dependencies {
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
     implementation(libs.firebase.storage.ktx)
+    implementation("androidx.compose.foundation:foundation-android:1.8.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

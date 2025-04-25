@@ -46,12 +46,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <!-- Título del Mes -->
+    <!-- Título lista de tareas -->
     <TextView
         android:id="@+id/txtMonth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="February 2024"
+        android:text="Lista de tareas"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingTop="16dp"/>
 
-    <!-- Calendario -->
+    <!-- Lista tareas -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerResumenEventos"
         android:layout_width="match_parent"

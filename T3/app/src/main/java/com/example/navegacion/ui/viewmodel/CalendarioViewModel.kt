@@ -15,25 +15,7 @@ class CalendarioViewModel : ViewModel() {
     private val auth = FirebaseAuth.getInstance()
     private val database = FirebaseDatabase.getInstance("https://proyectofinal-75067-default-rtdb.europe-west1.firebasedatabase.app/")
 
-    // Agregar un evento (local + Firebase)
-   /* fun agregarEvento(fecha: Long, evento: Evento) {
-        val uid = auth.currentUser?.uid ?: return
-        val fechaKey = fecha.toString()
-
-        val ref = database.reference
-            .child("eventos")
-            .child(uid)
-            .child(fechaKey)
-            .push()
-
-        val eventoConId = evento.copy(id = ref.key)
-        ref.setValue(eventoConId)
-
-        // Local
-        val eventos = eventosMap.value ?: mutableMapOf()
-        eventos.getOrPut(fecha) { mutableListOf() }.add(eventoConId)
-        eventosMap.value = eventos
-    }*/
+//Agregar eventos (firebase + local)
     fun agregarEvento(fecha: Long, evento: Evento) {
         val uid = auth.currentUser?.uid ?: return
         val fechaKey = fecha.toString()
