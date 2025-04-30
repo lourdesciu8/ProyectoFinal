@@ -1,3 +1,4 @@
+
 /*package com.example.navegacion.ui.fragment
 
 import android.os.Bundle
@@ -224,7 +225,3 @@ class HomeAlumnoFragment : Fragment() {
         _binding = null
     }
 }
-
-
-
-

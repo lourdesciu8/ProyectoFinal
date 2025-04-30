@@ -1,3 +1,4 @@
+
 /*package com.example.navegacion.ui.fragment
 
 import android.app.AlertDialog
@@ -374,7 +375,7 @@ class CalendarioAlumnoFragment : Fragment() {
         eventosAdapter.updateEventos(eventosCombinados)
     }
 
-//funcion para cargar tantos mis eventos como los que me asigan el profesor
+    //funcion para cargar tantos mis eventos como los que me asigan el profesor
     private fun observarEventosCombinados() {
         calendarioViewModel.obtenerEventos().observe(viewLifecycleOwner) {
             actualizarListaEventos()
@@ -447,4 +448,3 @@ class CalendarioAlumnoFragment : Fragment() {
         _binding = null
     }
 }
-
