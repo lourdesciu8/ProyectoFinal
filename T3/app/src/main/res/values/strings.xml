@@ -14,4 +14,11 @@
         <item>Profesor</item>
     </string-array>
 
+    <string-array name="tipos_evento">
+        <item>Examen</item>
+        <item>Tarea</item>
+        <item>Otro</item>
+    </string-array>
+
+
 </resources>
