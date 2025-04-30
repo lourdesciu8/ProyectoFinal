@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:text="Examen de Marzo"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textColor="@android:color/black" />
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Examen"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_marginTop="4dp" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nota: 7.5"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_marginTop="4dp" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fecha: 29/04/2025"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_marginTop="4dp" />
 
         <LinearLayout
@@ -61,8 +61,7 @@
                 android:layout_height="36dp"
                 android:src="@drawable/ic_edit"
                 android:contentDescription="Editar"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                app:tint="@android:color/darker_gray" />
+                android:background="?attr/selectableItemBackgroundBorderless" />
 
             <ImageButton
                 android:id="@+id/btnEliminar"
@@ -71,8 +70,7 @@
                 android:layout_marginStart="8dp"
                 android:src="@drawable/ic_delete"
                 android:contentDescription="Eliminar"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                app:tint="@android:color/darker_gray" />
+                android:background="?attr/selectableItemBackgroundBorderless" />
 
         </LinearLayout>
 

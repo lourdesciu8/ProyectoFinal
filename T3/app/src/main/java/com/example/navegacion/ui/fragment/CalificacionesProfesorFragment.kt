@@ -1,6 +1,7 @@
 package com.example.navegacion.ui.fragment
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.example.navegacion.ui.model.Calificacion
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.util.Calendar
 
 class CalificacionesProfesorFragment : Fragment() {
 
@@ -78,7 +80,7 @@ class CalificacionesProfesorFragment : Fragment() {
         }
     }
 
-    /** Carga todos los módulos desde el nodo "modulos" de Firebase */
+    //Carga todos los módulos desde el nodo "modulos" de Firebase
     private fun cargarModulos() {
         val ref = database.getReference("modulos")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -93,7 +95,7 @@ class CalificacionesProfesorFragment : Fragment() {
         })
     }
 
-    /** Carga todos los usuarios con rol "Alumno" desde Firebase */
+    //Carga todos los usuarios con rol "Alumno" desde Firebase
     private fun cargarAlumnos() {
         val ref = database.getReference("usuarios")
         ref.orderByChild("rol").equalTo("Alumno")
@@ -117,7 +119,7 @@ class CalificacionesProfesorFragment : Fragment() {
             })
     }
 
-    /** Carga las calificaciones de un alumno para un módulo seleccionado */
+    //Carga las calificaciones de un alumno para un módulo seleccionado
     private fun cargarCalificaciones() {
         val modulo = binding.spinnerModulos.selectedItem?.toString() ?: return
         val nombreAlumno = binding.spinnerAlumnos.selectedItem?.toString() ?: return
@@ -143,12 +145,26 @@ class CalificacionesProfesorFragment : Fragment() {
         })
     }
 
-    /** Muestra un AlertDialog para crear o editar una calificación */
+    //Muestra un AlertDialog para crear o editar una calificación
     private fun mostrarDialogoEdicion(calif: Calificacion?) {
         val editView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_nueva_calificacion, null)
         val edtTitulo = editView.findViewById<EditText>(R.id.edtTitulo)
         val edtNota = editView.findViewById<EditText>(R.id.edtNota)
-        val edtFecha = editView.findViewById<EditText>(R.id.edtFecha)
+        val edtFecha = editView.findViewById<EditText>(R.id.edtFecha) //Se muestra calendario
+        edtFecha.setOnClickListener {
+            val calendario = Calendar.getInstance()
+            val anio = calendario.get(Calendar.YEAR)
+            val mes = calendario.get(Calendar.MONTH)
+            val dia = calendario.get(Calendar.DAY_OF_MONTH)
+
+            val datePicker = DatePickerDialog(requireContext(), { _, year, month, dayOfMonth ->
+                val fechaFormateada = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
+                edtFecha.setText(fechaFormateada)
+            }, anio, mes, dia)
+
+            datePicker.show()
+        }
+
         val spTipo = editView.findViewById<Spinner>(R.id.spinnerTipo)
 
         val adapterTipo = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, listOf("Examen", "Ejercicio"))
@@ -167,14 +183,17 @@ class CalificacionesProfesorFragment : Fragment() {
             .setView(editView)
             .setPositiveButton("Guardar") { _, _ ->
                 val nueva = Calificacion(
+                    profesorUID = FirebaseAuth.getInstance().currentUser?.uid ?: "",
+                    nombreProfesor = FirebaseAuth.getInstance().currentUser?.displayName ?: "Desconocido",
+                    alumnoUID = alumnosMap.entries.find { it.value == binding.spinnerAlumnos.selectedItem.toString() }?.key ?: "",
+                    nombreAlumno = binding.spinnerAlumnos.selectedItem.toString(),
                     titulo = edtTitulo.text.toString(),
                     tipo = spTipo.selectedItem.toString(),
                     nota = edtNota.text.toString().toDoubleOrNull() ?: 0.0,
                     fecha = edtFecha.text.toString(),
-                    profesorUID = FirebaseAuth.getInstance().currentUser?.uid ?: "",
-                    modulo = binding.spinnerModulos.selectedItem.toString(),
-                    alumnoUID = alumnosMap.entries.find { it.value == binding.spinnerAlumnos.selectedItem.toString() }?.key ?: ""
+                    modulo = binding.spinnerModulos.selectedItem.toString()
                 )
+
 
                 val ref = database.getReference("calificaciones")
                     .child(nueva.alumnoUID)
