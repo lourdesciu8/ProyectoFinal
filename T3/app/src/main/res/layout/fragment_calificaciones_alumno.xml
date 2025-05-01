@@ -1,42 +1,68 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/txtTituloAlumno"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="📘 Tus Calificaciones"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:layout_height="wrap_content">
 
-    <Spinner
-        android:id="@+id/spinnerModulosAlumno"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"/>
+        <!-- Botón volver arriba -->
+        <ImageButton
+            android:id="@+id/btnVolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Volver"
+            android:src="@drawable/flecha_volver" />
 
-    <TextView
-        android:id="@+id/tvSinCalificaciones"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="No tienes calificaciones en este módulo"
-        android:textAlignment="center"
-        android:visibility="gone"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="16sp"
-        android:layout_marginTop="12dp"/>
+        <TextView
+            android:id="@+id/txtTituloAlumno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📘 Tus Calificaciones"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerNotasAlumno"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item_calificacion" />
+        <Spinner
+            android:id="@+id/spinnerModulosAlumno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvSinCalificaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No tienes calificaciones en este módulo"
+            android:textAlignment="center"
+            android:visibility="gone"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            android:layout_marginTop="12dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerNotasAlumno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_calificacion" />
+
+        <TextView
+            android:id="@+id/tvPromedio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Media del módulo: -"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+</ScrollView>
+

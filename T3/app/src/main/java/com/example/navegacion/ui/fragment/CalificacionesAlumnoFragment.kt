@@ -49,27 +49,39 @@ class CalificacionesAlumnoFragment : Fragment() {
         // Listener para el spinner
         binding.spinnerModulosAlumno.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val moduloSeleccionado = binding.spinnerModulosAlumno.selectedItem.toString()
+                val moduloSeleccionado = binding.spinnerModulosAlumno.selectedItem?.toString() ?: return
+                val alumnoUID = FirebaseAuth.getInstance().currentUser?.uid ?: return
                 cargarCalificacionesAlumnoPorModulo(alumnoUID, moduloSeleccionado)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
+
+        binding.btnVolver.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
     }
 
-    private fun cargarModulosAlumno(uid: String) {
-        val ref = database.getReference("calificaciones").child(uid)
+    private fun cargarModulosAlumno(alumnoUID: String) {
+        val ref = database.getReference("modulos")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val modulos = snapshot.children.mapNotNull { it.key }
+                val modulos = snapshot.children.mapNotNull { it.child("nombre").getValue(String::class.java) }
                 val adapterSpinner = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, modulos)
                 adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 binding.spinnerModulosAlumno.adapter = adapterSpinner
+
+                // Lanzar la carga del primer módulo automáticamente si hay módulos
+                if (modulos.isNotEmpty()) {
+                    cargarCalificacionesAlumnoPorModulo(alumnoUID, modulos[0])
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {}
         })
     }
+
 
     private fun cargarCalificacionesAlumnoPorModulo(alumnoUID: String, modulo: String) {
         val ref = database.getReference("calificaciones").child(alumnoUID).child(modulo)
@@ -87,12 +99,29 @@ class CalificacionesAlumnoFragment : Fragment() {
 
                 adapter.actualizarLista(lista)
 
-                // Mostrar u ocultar el mensaje de "sin calificaciones"
-                binding.tvSinCalificaciones.visibility = if (lista.isEmpty()) View.VISIBLE else View.GONE
+                // Comprobamos si la lista de calificaciones está vacía
+                if (lista.isEmpty()) {
+                    // Mostramos el mensaje de "sin calificaciones"
+                    binding.tvSinCalificaciones.visibility = View.VISIBLE
+
+                    // Ocultamos el TextView de promedio porque no hay notas
+                    binding.tvPromedio.visibility = View.GONE
+                } else {
+                    // Ocultamos el mensaje de "sin calificaciones" porque sí hay notas
+                    binding.tvSinCalificaciones.visibility = View.GONE
+
+                    // Calculamos la media de las notas
+                    val media = lista.map { it.nota }.average()
+                    val redondeada = String.format("%.2f", media)
+                    binding.tvPromedio.text = "Media del módulo: $redondeada"
+                    binding.tvPromedio.visibility = View.VISIBLE
+                }
+
             }
 
             override fun onCancelled(error: DatabaseError) {}
         })
+
     }
 
 }
