@@ -11,8 +11,9 @@ import com.example.navegacion.ui.model.Calificacion
 
 class CalificacionAdapter(
     private var lista: MutableList<Calificacion>,
-    private val onEditarClick: (Calificacion) -> Unit,
-    private val onBorrarClick: (Calificacion) -> Unit
+    private val onEditarClick: (Calificacion) -> Unit = {},
+    private val onBorrarClick: (Calificacion) -> Unit = {},
+    private val esProfesor: Boolean = true
 ) : RecyclerView.Adapter<CalificacionAdapter.CalificacionViewHolder>() {
 
     class CalificacionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -48,8 +49,14 @@ class CalificacionAdapter(
         holder.layoutNota.setBackgroundColor(ContextCompat.getColor(context, color))
 
         // Acciones
-        holder.btnEditar.setOnClickListener { onEditarClick(calif) }
-        holder.btnEliminar.setOnClickListener { onBorrarClick(calif) }
+        if (!esProfesor) { //Si es Alumno los botones de Editar y Eliminar se ocultan
+            holder.btnEditar.visibility = View.GONE
+            holder.btnEliminar.visibility = View.GONE
+        } else {
+            holder.btnEditar.setOnClickListener { onEditarClick(calif) }
+            holder.btnEliminar.setOnClickListener { onBorrarClick(calif) }
+        }
+
     }
 
     override fun getItemCount(): Int = lista.size
