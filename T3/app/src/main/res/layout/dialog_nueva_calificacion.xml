@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/windowBackground">
+
+    <EditText
+        android:id="@+id/edtTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Título (Ej. Examen 1)"
+        android:inputType="textCapWords"
+        android:maxLines="1"
+        android:importantForAccessibility="yes" />
+
+    <EditText
+        android:id="@+id/edtNota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nota (0 - 10)"
+        android:inputType="numberDecimal"
+        android:maxLines="1"
+        android:layout_marginTop="12dp"
+        android:importantForAccessibility="yes" />
+
+    <EditText
+        android:id="@+id/edtFecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fecha (Ej. 28/04/2025)"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_marginTop="12dp"
+        android:importantForAccessibility="yes" />
+
+    <Spinner
+        android:id="@+id/spinnerTipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:spinnerMode="dropdown"
+        android:importantForAccessibility="yes" />
+</LinearLayout>
