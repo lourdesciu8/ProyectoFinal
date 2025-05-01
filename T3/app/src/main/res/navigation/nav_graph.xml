@@ -38,6 +38,9 @@
         android:name="com.example.navegacion.ui.fragment.HomeAlumnoFragment"
         android:label="HomeAlumnoFragment" >
         <action
+            android:id="@+id/action_homeAlumno_to_hilosFragment"
+            app:destination="@id/hilosFragment" />
+        <action
             android:id="@+id/action_homeAlumnoFragment_to_calificacionesAlumnoFragmnet"
             app:destination="@id/calificacionesAlumnoFragmnet" />
         <action
@@ -54,6 +57,9 @@
         android:id="@+id/homeProfesorFragment"
         android:name="com.example.navegacion.ui.fragment.HomeProfesorFragment"
         android:label="HomeProfesorFragment" >
+        <action
+            android:id="@+id/action_homeProfesor_to_hilosFragment"
+            app:destination="@id/hilosFragment" />
         <action
             android:id="@+id/action_homeProfesorFragment_to_calendarioProfesorFragment"
             app:destination="@id/calendarioProfesorFragment" />
