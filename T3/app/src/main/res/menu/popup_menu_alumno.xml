@@ -15,10 +15,13 @@
         <item
             android:id="@+id/action_calificaciones"
             android:title="Calificaciones" />
-
+        <item
+            android:id="@+id/action_foro"
+            android:title="Foro" />
         <item
         android:id="@+id/action_logout"
         android:title="Cerrar sesión" />
+
 
 </menu>
 

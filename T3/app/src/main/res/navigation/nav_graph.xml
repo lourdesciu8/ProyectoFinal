@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
+
+    <!-- Login -->
     <fragment
-        tools:layout="@layout/fragment_login"
         android:id="@+id/loginFragment"
         android:name="com.example.navegacion.ui.fragment.LoginFragment"
-        android:label="Iniciar sesión" >
+        android:label="Iniciar sesión"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registroFragment"
             app:destination="@id/registroFragment"
@@ -19,24 +21,32 @@
             app:destination="@id/homeAlumnoFragment" />
         <action
             android:id="@+id/action_loginFragment_to_homeProfesorFragment"
-            app:destination="@+id/homeProfesorFragment" />
+            app:destination="@id/homeProfesorFragment" />
         <action
             android:id="@+id/action_loginFragment_to_recuperarContrasenaFragment"
             app:destination="@id/recuperarContrasenaFragment" />
     </fragment>
+
+    <!-- Registro -->
     <fragment
-        tools:layout="@layout/fragment_registro"
         android:id="@+id/registroFragment"
         android:name="com.example.navegacion.ui.fragment.RegistroFragment"
-        android:label="Registro" >
+        android:label="Registro"
+        tools:layout="@layout/fragment_registro">
         <action
             android:id="@+id/action_registroFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+
+    <!-- Home Alumno -->
     <fragment
         android:id="@+id/homeAlumnoFragment"
         android:name="com.example.navegacion.ui.fragment.HomeAlumnoFragment"
-        android:label="HomeAlumnoFragment" >
+        android:label="Home Alumno"
+        tools:layout="@layout/fragment_homealumno">
+        <action
+            android:id="@+id/action_homeAlumno_to_hilosFragment"
+            app:destination="@id/hilosFragment" />
         <action
             android:id="@+id/action_homeAlumnoFragment_to_calificacionesAlumnoFragmnet"
             app:destination="@id/calificacionesAlumnoFragmnet" />
@@ -50,10 +60,16 @@
             android:id="@+id/action_homeAlumnoFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+
+    <!-- Home Profesor -->
     <fragment
         android:id="@+id/homeProfesorFragment"
         android:name="com.example.navegacion.ui.fragment.HomeProfesorFragment"
-        android:label="HomeProfesorFragment" >
+        android:label="Home Profesor"
+        tools:layout="@layout/fragment_homeprofesor">
+        <action
+            android:id="@+id/action_homeProfesor_to_hilosFragment"
+            app:destination="@id/hilosFragment" />
         <action
             android:id="@+id/action_homeProfesorFragment_to_calendarioProfesorFragment"
             app:destination="@id/calendarioProfesorFragment" />
@@ -67,80 +83,121 @@
             android:id="@+id/action_homeProfesorFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+
+    <!-- Calendario Alumno -->
     <fragment
         android:id="@+id/calendarioAlumnoFragment"
         android:name="com.example.navegacion.ui.fragment.CalendarioAlumnoFragment"
-        android:label="CalendarioAlumnoFragment" >
+        android:label="Calendario Alumno"
+        tools:layout="@layout/fragment_calendarioalumno">
         <action
             android:id="@+id/action_calendarioAlumnoFragment_to_homeAlumnoFragment"
             app:destination="@id/homeAlumnoFragment" />
     </fragment>
+
+    <!-- Calificaciones Alumno -->
     <fragment
         android:id="@+id/calificacionesAlumnoFragmnet"
         android:name="com.example.navegacion.ui.fragment.CalificacionesAlumnoFragmnet"
-        android:label="CalificacionesAlumnoFragmnet" >
+        android:label="Calificaciones Alumno"
+        tools:layout="@layout/fragment_calificacionesalumno">
         <action
             android:id="@+id/action_calificacionesAlumnoFragmnet_to_homeAlumnoFragment"
             app:destination="@id/homeAlumnoFragment" />
     </fragment>
+
+    <!-- Temario Alumno -->
     <fragment
         android:id="@+id/temarioAlumnoFragment"
         android:name="com.example.navegacion.ui.fragment.TemarioAlumnoFragment"
-        android:label="TemarioAlumnoFragment" >
+        android:label="Temario Alumno"
+        tools:layout="@layout/fragment_temarioalumno">
         <action
             android:id="@+id/action_temarioAlumnoFragment_to_homeAlumnoFragment"
             app:destination="@id/homeAlumnoFragment" />
     </fragment>
+
+    <!-- Progreso -->
     <fragment
         android:id="@+id/progresoFragment"
         android:name="com.example.navegacion.ui.fragment.ProgresoFragment"
-        android:label="ProgresoFragment" >
+        android:label="Progreso"
+        tools:layout="@layout/fragment_progreso">
         <action
             android:id="@+id/action_progresoFragment_to_homeAlumnoFragment"
             app:destination="@id/homeAlumnoFragment" />
     </fragment>
+
+    <!-- Calendario Profesor -->
     <fragment
         android:id="@+id/calendarioProfesorFragment"
         android:name="com.example.navegacion.ui.fragment.CalendarioProfesorFragment"
-        android:label="CalendarioProfesorFragment" >
+        android:label="Calendario Profesor"
+        tools:layout="@layout/fragment_calendarioprofesor">
         <action
             android:id="@+id/action_calendarioProfesorFragment_to_homeProfesorFragment"
             app:destination="@id/homeProfesorFragment" />
     </fragment>
+
+    <!-- Calificaciones Profesor -->
     <fragment
         android:id="@+id/calificacionesProfesorFragment"
         android:name="com.example.navegacion.ui.fragment.CalificacionesProfesorFragment"
-        android:label="CalificacionesProfesorFragment" >
+        android:label="Calificaciones Profesor"
+        tools:layout="@layout/fragment_calificacionesprofesor">
         <action
             android:id="@+id/action_calificacionesProfesorFragment_to_homeProfesorFragment"
             app:destination="@id/homeProfesorFragment" />
     </fragment>
+
+    <!-- Temario Profesor -->
     <fragment
         android:id="@+id/temarioProfesorFragment"
         android:name="com.example.navegacion.ui.fragment.TemarioProfesorFragment"
-        android:label="TemarioProfesorFragment" >
+        android:label="Temario Profesor"
+        tools:layout="@layout/fragment_temarioprofesor">
         <action
             android:id="@+id/action_temarioProfesorFragment_to_homeProfesorFragment"
             app:destination="@id/homeProfesorFragment" />
     </fragment>
+
+    <!-- Recuperar Contraseña -->
     <fragment
         android:id="@+id/recuperarContrasenaFragment"
         android:name="com.example.navegacion.ui.fragment.RecuperarContrasenaFragment"
-        android:label="RecuperarContrasenaFragment"
+        android:label="Recuperar contraseña"
         tools:layout="@layout/fragment_recuperarcontrasena">
         <action
             android:id="@+id/action_recuperarContrasenaFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
 
+    <!-- Soporte Técnico -->
     <fragment
         android:id="@+id/soporteFragment"
         android:name="com.example.navegacion.ui.fragment.SoporteFragment"
         android:label="Soporte Técnico"
         tools:layout="@layout/fragment_soporte" />
-
-    <!-- Acción global para navegar a Soporte desde cualquier punto -->
     <action
         android:id="@+id/action_global_soporteFragment"
         app:destination="@id/soporteFragment" />
+
+    <!-- Foro: Hilos -->
+    <fragment
+        android:id="@+id/hilosFragment"
+        android:name="com.example.navegacion.ui.fragment.HilosFragment"
+        android:label="FORO-COMUN"
+        tools:layout="@layout/fragment_hilos">
+        <action
+            android:id="@+id/action_hilosFragment_to_detalleHiloFragment"
+            app:destination="@id/detalleHiloFragment" />
+    </fragment>
+
+    <!-- Detalle del hilo -->
+    <fragment
+        android:id="@+id/detalleHiloFragment"
+        android:name="com.example.navegacion.ui.fragment.DetalleHiloFragment"
+        android:label="Detalle del Hilo"
+        tools:layout="@layout/fragment_detalle_hilo" />
+
 </navigation>

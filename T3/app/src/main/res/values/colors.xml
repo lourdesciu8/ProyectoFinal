@@ -3,4 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorApp">#3998a9</color>
+    <!-- paleta definida entre los tres -->
+    <color name="cal_poly_green">#26532B</color>
+    <color name="shamrock_green">#399E5A</color>    <!-- colorApp -->
+    <color name="verdigris">#5ACBC9</color>
+    <color name="turquoise">#63E2C6</color>
+    <color name="aqua">#6EF9F5</color>
 </resources>
