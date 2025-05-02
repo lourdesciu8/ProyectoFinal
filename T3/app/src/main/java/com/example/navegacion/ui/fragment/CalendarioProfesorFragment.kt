@@ -267,8 +267,6 @@ class CalendarioProfesorFragment : Fragment() {
                 moduloActual = modulo
                 calendarioViewModel.cargarEventosModuloDesdeFirebase(modulo)
                 observarEventosDesdeViewModel()
-            } else {
-                // 🚨 No encontrado -> mostrar error o manejarlo
             }
         }
 

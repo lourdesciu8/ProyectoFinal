@@ -42,7 +42,7 @@ android {
 dependencies {
     implementation(libs.view)
 
-
+    implementation("com.kizitonwose.calendar:view:2.6.2")
     // Firebase Authentication
     implementation("com.google.firebase:firebase-auth-ktx")
     // Google Sign-In
