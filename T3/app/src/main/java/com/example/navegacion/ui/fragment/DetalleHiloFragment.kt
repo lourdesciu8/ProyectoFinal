@@ -1,3 +1,4 @@
+// src/main/java/com/example/navegacion/ui/fragment/DetalleHiloFragment.kt
 package com.example.navegacion.ui.fragment
 
 import android.os.Bundle
@@ -12,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.navegacion.databinding.FragmentDetalleHiloBinding
 import com.example.navegacion.ui.adapter.MensajesAdapter
 import com.example.navegacion.ui.model.Mensaje
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -22,6 +22,9 @@ class DetalleHiloFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var msgDbRef: DatabaseReference
+    private lateinit var usuariosRef: DatabaseReference
+    private val userMap = mutableMapOf<String, String>()
+
     private val listaMensajes = mutableListOf<Mensaje>()
     private lateinit var adapter: MensajesAdapter
 
@@ -33,9 +36,7 @@ class DetalleHiloFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetalleHiloBinding.inflate(inflater, container, false)
         return binding.root
@@ -43,55 +44,59 @@ class DetalleHiloFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Botón Volver
-        binding.btnVolver.setOnClickListener {
-            findNavController().navigateUp()
-        }
 
-        // Ajusta el título de la ActionBar
+        // Botón volver
+        binding.btnVolver.setOnClickListener { findNavController().navigateUp() }
+
+        // Título
         (requireActivity() as AppCompatActivity)
             .supportActionBar
             ?.title = "Hilo: $idHilo"
 
-        // Referencia a /hilos/{idHilo}/mensajes
-        msgDbRef = FirebaseDatabase
-            .getInstance()
+        // Referencias Firebase
+        msgDbRef = FirebaseDatabase.getInstance()
             .getReference("hilos")
             .child(idHilo)
             .child("mensajes")
+        usuariosRef = FirebaseDatabase.getInstance()
+            .getReference("usuarios")
 
-        // Configura RecyclerView y adapter
-        adapter = MensajesAdapter(listaMensajes)
-        binding.rvMensajes.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = this@DetalleHiloFragment.adapter
-        }
-
-        // Carga mensajes en tiempo real
-        cargarMensajes()
-
-        // Enviar nuevo mensaje
-        binding.btnEnviarMensaje.setOnClickListener {
-            val texto = binding.etNuevoMensaje.text.toString().trim()
-            if (texto.isNotEmpty()) {
-                enviarMensaje(texto)
-                binding.etNuevoMensaje.text?.clear()
-            } else {
-                Toast.makeText(requireContext(),
-                    "Escribe algo primero", Toast.LENGTH_SHORT).show()
+        // Carga mapa UID→nombre
+        usuariosRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (userSnap in snapshot.children) {
+                    val uid = userSnap.key ?: continue
+                    val nombre = userSnap.child("nombre")
+                        .getValue(String::class.java)
+                        ?: uid
+                    userMap[uid] = nombre
+                }
+                setupRecyclerView()
             }
-        }
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(),
+                    "Error cargando usuarios: ${error.message}",
+                    Toast.LENGTH_LONG).show()
+                setupRecyclerView()
+            }
+        })
     }
 
-    private fun cargarMensajes() {
-        listaMensajes.clear()
+    private fun setupRecyclerView() {
+        // LayoutManager con scroll al final
+        val lm = LinearLayoutManager(requireContext()).apply { stackFromEnd = true }
+        binding.rvMensajes.layoutManager = lm
+
+        // Adapter con el mapa de nombres
+        adapter = MensajesAdapter(listaMensajes, userMap)
+        binding.rvMensajes.adapter = adapter
+
+        // Escucha mensajes en tiempo real
         msgDbRef.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val m = snapshot.getValue(Mensaje::class.java)
-                if (m != null) {
+                snapshot.getValue(Mensaje::class.java)?.let { m ->
                     listaMensajes.add(m.copy(idMensaje = snapshot.key ?: ""))
                     adapter.notifyItemInserted(listaMensajes.size - 1)
-                    binding.rvMensajes.scrollToPosition(listaMensajes.size - 1)
                 }
             }
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) = Unit
@@ -103,28 +108,35 @@ class DetalleHiloFragment : Fragment() {
                     Toast.LENGTH_LONG).show()
             }
         })
-    }
 
-    private fun enviarMensaje(texto: String) {
-        val newMsgRef = msgDbRef.push()
-        val idMsg = newMsgRef.key ?: return
-        val marca = System.currentTimeMillis()
-        val autor = FirebaseAuth.getInstance().currentUser?.uid ?: ""
-
-        val msg = Mensaje(
-            idMensaje = idMsg,
-            texto = texto,
-            autor = autor,
-            marcaTemporal = marca
-        )
-
-        newMsgRef.setValue(msg)
-            .addOnFailureListener { e ->
+        // Envío de mensaje
+        binding.btnEnviarMensaje.setOnClickListener {
+            val texto = binding.etNuevoMensaje.text.toString().trim()
+            if (texto.isNotEmpty()) {
+                val newMsgRef = msgDbRef.push()
+                val msg = Mensaje(
+                    idMensaje     = newMsgRef.key ?: "",
+                    texto         = texto,
+                    autor         = FirebaseAuth.getInstance().currentUser?.uid ?: "",
+                    marcaTemporal = System.currentTimeMillis()
+                )
+                newMsgRef.setValue(msg)
+                    .addOnFailureListener { e ->
+                        Toast.makeText(requireContext(),
+                            "Error enviando mensaje: ${e.message}",
+                            Toast.LENGTH_LONG).show()
+                    }
+                binding.etNuevoMensaje.text?.clear()
+            } else {
                 Toast.makeText(requireContext(),
-                    "Error enviando mensaje: ${e.message}",
-                    Toast.LENGTH_LONG).show()
+                    "Escribe algo primero",
+                    Toast.LENGTH_SHORT).show()
             }
+        }
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

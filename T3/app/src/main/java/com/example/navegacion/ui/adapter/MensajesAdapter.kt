@@ -1,3 +1,4 @@
+// src/main/java/com/example/navegacion/ui/adapter/MensajesAdapter.kt
 package com.example.navegacion.ui.adapter
 
 import android.view.LayoutInflater
@@ -9,14 +10,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MensajesAdapter(
-    private val items: List<Mensaje>
+    private val items: List<Mensaje>,
+    private val userMap: Map<String, String>  // uid → nombre
 ) : RecyclerView.Adapter<MensajesAdapter.MensajeVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MensajeVH {
         val binding = ItemMensajeBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+            LayoutInflater.from(parent.context), parent, false
         )
         return MensajeVH(binding)
     }
@@ -25,13 +25,19 @@ class MensajesAdapter(
         val msg = items[position]
         holder.binding.tvTextoMensaje.text = msg.texto
 
-        // Formatear marcaTemporal a "HH:mm dd/MM/yyyy"
-        val sdf = SimpleDateFormat("HH:mm dd/MM/yyyy", Locale.getDefault())
-        holder.binding.tvInfoMensaje.text =
-            "${msg.autor} • ${sdf.format(Date(msg.marcaTemporal))}"
+        // Mapea UID → nombre (o usa UID si no existe)
+        val autorNombre = userMap[msg.autor] ?: msg.autor
+        // Formateador con zona horaria de Madrid
+        val sdf = SimpleDateFormat("HH:mm dd/MM/yyyy", Locale.getDefault()).apply {
+            timeZone = TimeZone.getTimeZone("Europe/Madrid")
+        }
+        val fechaFormateada = sdf.format(Date(msg.marcaTemporal))
+
+        holder.binding.tvInfoMensaje.text = "$autorNombre • $fechaFormateada"
     }
 
-    override fun getItemCount(): Int = items.size
 
-    inner class MensajeVH(val binding: ItemMensajeBinding) : RecyclerView.ViewHolder(binding.root)
+    override fun getItemCount() = items.size
+
+    class MensajeVH(val binding: ItemMensajeBinding) : RecyclerView.ViewHolder(binding.root)
 }
