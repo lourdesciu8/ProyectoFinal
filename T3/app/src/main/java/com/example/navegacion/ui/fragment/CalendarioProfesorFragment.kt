@@ -239,7 +239,8 @@ import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
-class CalendarioProfesorFragment : Fragment() {
+class
+CalendarioProfesorFragment : Fragment() {
 
     private var _binding: FragmentCalendarioprofesorBinding? = null
     private val binding get() = _binding!!
