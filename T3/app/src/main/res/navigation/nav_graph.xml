@@ -38,6 +38,9 @@
         android:name="com.example.navegacion.ui.fragment.HomeAlumnoFragment"
         android:label="HomeAlumnoFragment" >
         <action
+            android:id="@+id/action_homeAlumno_to_hilosFragment"
+            app:destination="@id/hilosFragment" />
+        <action
             android:id="@+id/action_homeAlumnoFragment_to_calificacionesAlumnoFragmnet"
             app:destination="@id/calificacionesAlumnoFragmnet" />
         <action
@@ -54,6 +57,9 @@
         android:id="@+id/homeProfesorFragment"
         android:name="com.example.navegacion.ui.fragment.HomeProfesorFragment"
         android:label="HomeProfesorFragment" >
+        <action
+            android:id="@+id/action_homeProfesor_to_hilosFragment"
+            app:destination="@id/hilosFragment" />
         <action
             android:id="@+id/action_homeProfesorFragment_to_calendarioProfesorFragment"
             app:destination="@id/calendarioProfesorFragment" />
@@ -123,6 +129,8 @@
             android:id="@+id/action_temarioProfesorFragment_to_homeProfesorFragment"
             app:destination="@id/homeProfesorFragment" />
     </fragment>
+
+    <!-- Recuperar Contraseña -->
     <fragment
         android:id="@+id/recuperarContrasenaFragment"
         android:name="com.example.navegacion.ui.fragment.RecuperarContrasenaFragment"
@@ -133,14 +141,32 @@
             app:destination="@id/loginFragment" />
     </fragment>
 
+    <!-- Soporte Técnico -->
     <fragment
         android:id="@+id/soporteFragment"
         android:name="com.example.navegacion.ui.fragment.SoporteFragment"
         android:label="Soporte Técnico"
         tools:layout="@layout/fragment_soporte" />
-
-    <!-- Acción global para navegar a Soporte desde cualquier punto -->
     <action
         android:id="@+id/action_global_soporteFragment"
         app:destination="@id/soporteFragment" />
+
+    <!-- Foro: Hilos -->
+    <fragment
+        android:id="@+id/hilosFragment"
+        android:name="com.example.navegacion.ui.fragment.HilosFragment"
+        android:label="FORO-COMUN"
+        tools:layout="@layout/fragment_hilos">
+        <action
+            android:id="@+id/action_hilosFragment_to_detalleHiloFragment"
+            app:destination="@id/detalleHiloFragment" />
+    </fragment>
+
+    <!-- Detalle del hilo -->
+    <fragment
+        android:id="@+id/detalleHiloFragment"
+        android:name="com.example.navegacion.ui.fragment.DetalleHiloFragment"
+        android:label="Detalle del Hilo"
+        tools:layout="@layout/fragment_detalle_hilo" />
+
 </navigation>

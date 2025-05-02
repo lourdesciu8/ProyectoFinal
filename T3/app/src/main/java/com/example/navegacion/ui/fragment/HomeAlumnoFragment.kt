@@ -194,6 +194,10 @@ class HomeAlumnoFragment : Fragment() {
 
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
+                R.id.action_foro -> {
+                    findNavController().navigate(R.id.action_homeAlumno_to_hilosFragment)
+                    true
+                }
                 R.id.action_calendario -> {
                     findNavController().navigate(R.id.calendarioAlumnoFragment)
                     true
