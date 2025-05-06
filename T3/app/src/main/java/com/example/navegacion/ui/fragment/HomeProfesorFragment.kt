@@ -1,5 +1,5 @@
-
-/*package com.example.navegacion.ui.fragment
+/*
+package com.example.navegacion.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +14,7 @@ import com.example.navegacion.R
 import com.example.navegacion.databinding.FragmentHomeprofesorBinding
 import com.example.navegacion.ui.adapter.ResumenEventosAdapter
 import com.example.navegacion.ui.viewmodel.CalendarioViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeProfesorFragment : Fragment() {
 
@@ -22,8 +23,7 @@ class HomeProfesorFragment : Fragment() {
     private val calendarioViewModel: CalendarioViewModel by activityViewModels()
 
     private lateinit var resumenAdapter: ResumenEventosAdapter
-
-    private val moduloActual = "NombreDelModulo" // ⚡ TODO: pon aquí el módulo correcto del profesor
+    private val uid get() = FirebaseAuth.getInstance().currentUser?.uid
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeprofesorBinding.inflate(inflater, container, false)
@@ -39,30 +39,26 @@ class HomeProfesorFragment : Fragment() {
 
         setupRecyclerView()
 
-        // 🛠️ CORREGIDO: Ahora carga eventos de módulo (no de alumno)
-        calendarioViewModel.cargarEventosModuloDesdeFirebase(moduloActual)
-
-        observarEventosDesdeViewModel()
+        calendarioViewModel.cargarEventosAlumno(uid!!)
+        calendarioViewModel.eventosAlumno.observe(viewLifecycleOwner) { lista ->
+            val eventosPropios = lista.filter { it.creadoPor == uid }
+                .sortedBy { it.fecha }
+                .take(10)
+            resumenAdapter.updateEventos(eventosPropios)
+        }
     }
 
     private fun setupRecyclerView() {
         resumenAdapter = ResumenEventosAdapter(mutableListOf()) { evento ->
-            // Al pulsar un evento -> navegar al calendario
-            findNavController().navigate(R.id.calendarioProfesorFragment)
+            val bundle = Bundle().apply {
+                putLong("fechaSeleccionada", evento.fecha ?: 0L)
+            }
+            findNavController().navigate(R.id.calendarioProfesorFragment, bundle)
         }
 
         binding.recyclerResumenEventosProfesor.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = resumenAdapter
-        }
-    }
-
-    private fun observarEventosDesdeViewModel() {
-        calendarioViewModel.obtenerEventosModulo().observe(viewLifecycleOwner) { mapa ->
-            val todosEventos = mapa.values.flatten()
-                .sortedBy { it.timestamp } // Ordenar por fecha
-                .take(10) // Mostrar solo los 10 más próximos
-            resumenAdapter.updateEventos(todosEventos)
         }
     }
 
@@ -72,6 +68,10 @@ class HomeProfesorFragment : Fragment() {
 
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
+                R.id.action_foro -> {
+                    findNavController().navigate(R.id.action_homeProfesor_to_hilosFragment)
+                    true
+                }
                 R.id.action_calendario_profesor -> {
                     findNavController().navigate(R.id.calendarioProfesorFragment)
                     true
@@ -98,14 +98,11 @@ class HomeProfesorFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-}
-*/
+}*/
 package com.example.navegacion.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -115,17 +112,21 @@ import com.example.navegacion.R
 import com.example.navegacion.databinding.FragmentHomeprofesorBinding
 import com.example.navegacion.ui.adapter.ResumenEventosAdapter
 import com.example.navegacion.ui.viewmodel.CalendarioViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeProfesorFragment : Fragment() {
 
     private var _binding: FragmentHomeprofesorBinding? = null
     private val binding get() = _binding!!
     private val calendarioViewModel: CalendarioViewModel by activityViewModels()
-
     private lateinit var resumenAdapter: ResumenEventosAdapter
-    private var moduloActual: String? = null
+    private val uid get() = FirebaseAuth.getInstance().currentUser?.uid
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentHomeprofesorBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -139,36 +140,27 @@ class HomeProfesorFragment : Fragment() {
 
         setupRecyclerView()
 
-        // 🛠️ AHORA DETECTAMOS AUTOMÁTICAMENTE el módulo del profesor
-        calendarioViewModel.obtenerModuloDelProfesor { modulo ->
-            if (modulo != null) {
-                moduloActual = modulo
-                calendarioViewModel.cargarEventosModuloDesdeFirebase(modulo)
-                observarEventosDesdeViewModel()
-            } else {
-                // Aquí podrías mostrar un error (no se encontró módulo asociado)
-            }
+        calendarioViewModel.cargarEventosProfesor(uid!!)
+
+        calendarioViewModel.eventosProfesor.observe(viewLifecycleOwner) { lista ->
+            val eventosOrdenados = lista
+                .sortedBy { it.fecha }
+                .take(5)
+            resumenAdapter.updateEventos(eventosOrdenados)
         }
     }
 
     private fun setupRecyclerView() {
         resumenAdapter = ResumenEventosAdapter(mutableListOf()) { evento ->
-            // Al pulsar un evento -> navegar al calendario
-            findNavController().navigate(R.id.calendarioProfesorFragment)
+            val bundle = Bundle().apply {
+                putLong("fechaSeleccionada", evento.fecha ?: 0L)
+            }
+            findNavController().navigate(R.id.calendarioProfesorFragment, bundle)
         }
 
         binding.recyclerResumenEventosProfesor.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = resumenAdapter
-        }
-    }
-
-    private fun observarEventosDesdeViewModel() {
-        calendarioViewModel.obtenerEventosModulo().observe(viewLifecycleOwner) { mapa ->
-            val todosEventos = mapa.values.flatten()
-                .sortedBy { it.timestamp } // Ordenar por fecha
-                .take(10) // Mostrar solo los 10 más próximos
-            resumenAdapter.updateEventos(todosEventos)
         }
     }
 
@@ -178,7 +170,7 @@ class HomeProfesorFragment : Fragment() {
 
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.action_foro->{
+                R.id.action_foro -> {
                     findNavController().navigate(R.id.action_homeProfesor_to_hilosFragment)
                     true
                 }
@@ -209,4 +201,5 @@ class HomeProfesorFragment : Fragment() {
         _binding = null
     }
 }
+
 

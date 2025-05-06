@@ -63,4 +63,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("com.google.firebase:firebase-messaging:24.1.1") // versión reciente
 }
