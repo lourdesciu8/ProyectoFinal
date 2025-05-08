@@ -8,6 +8,11 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="action_global_soporteFragment">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="calendarioAlumnoFragment">
                     <value>
                       <LayoutPositions>
@@ -92,13 +97,46 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="detalleHiloFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="256" />
+                            <option name="y" value="368" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="hilosFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="368" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_hilosFragment_to_detalleHiloFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="homeAlumnoFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-383" />
-                            <option name="y" value="347" />
+                            <option name="x" value="-389" />
+                            <option name="y" value="356" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -119,6 +157,11 @@
                               </value>
                             </entry>
                             <entry key="action_homeAlumnoFragment_to_temarioAlumnoFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeAlumno_to_hilosFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -155,6 +198,11 @@
                               </value>
                             </entry>
                             <entry key="action_homeProfesorFragment_to_temarioProfesorFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeProfesor_to_hilosFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -196,6 +244,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="notificacionesFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-567" />
+                            <option name="y" value="16" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -259,6 +319,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="soporteFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
