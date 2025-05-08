@@ -8,6 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -15,16 +17,35 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        // Puedes enviar este token a tu servidor si es necesario
+
+        // Guarda el token en la base de datos bajo el UID del usuario actual
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        if (uid != null) {
+            val ref = FirebaseDatabase.getInstance("https://proyectofinal-75067-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("tokens").child(uid)
+            ref.setValue(token)
+        }
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        super.onMessageReceived(remoteMessage)
+        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
-        remoteMessage.notification?.let {
-            mostrarNotificacion(it.title, it.body)
-        }
+        val titulo = remoteMessage.data["title"] ?: "Título"
+        val cuerpo = remoteMessage.data["body"] ?: "Mensaje"
+        val timestamp = System.currentTimeMillis()
+
+        val notificacion = mapOf(
+            "titulo" to titulo,
+            "cuerpo" to cuerpo,
+            "timestamp" to timestamp
+        )
+
+        val ref = FirebaseDatabase.getInstance("https://proyectofinal-75067-default-rtdb.europe-west1.firebasedatabase.app")
+            .getReference("notificaciones").child(uid)
+
+        ref.push().setValue(notificacion)
     }
+
 
     private fun mostrarNotificacion(titulo: String?, mensaje: String?) {
         val canalId = "canal_notificaciones"
@@ -35,7 +56,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         )
 
         val builder = NotificationCompat.Builder(this, canalId)
-            .setSmallIcon(R.drawable.bell) // Usa un icono válido en tu proyecto
+            .setSmallIcon(R.drawable.bell)
             .setContentTitle(titulo ?: "Nueva notificación")
             .setContentText(mensaje ?: "")
             .setAutoCancel(true)
@@ -56,4 +77,3 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         manager.notify(System.currentTimeMillis().toInt(), builder.build())
     }
 }
-

@@ -8,69 +8,60 @@
     tools:context="com.example.navegacion.ui.fragment.HomeAlumnoFragment"
     android:padding="16dp">
 
-    <!-- Notificación de Examen -->
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+    <!-- Botón para ver notificaciones pendientes -->
+    <Button
+        android:id="@+id/btnNotificaciones"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Notificaciones pendientes"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/shamrock_green"
+        android:textColor="@android:color/white"
+        android:drawableStart="@drawable/bell"
+        android:drawablePadding="8dp"
+        android:padding="10dp"
+        android:elevation="2dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toStartOf="@id/menuButton"
+        app:layout_constraintHorizontal_weight="1"/>
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/bell"
-            app:tint="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="8dp"
-            android:text="Examen el 24 de febrero"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <!-- Botón Menú -->
+    <!-- Botón de menú lateral o navegación -->
     <ImageView
         android:id="@+id/menuButton"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/menu"
         android:contentDescription="Menú"
+        android:background="?selectableItemBackgroundBorderless"
         android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Título lista de tareas -->
+    <!-- Título de sección -->
     <TextView
         android:id="@+id/txtMonth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lista de tareas"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@id/menuButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:paddingTop="16dp"/>
-
-    <!-- Lista tareas -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerResumenEventos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/txtMonth"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/btnNotificaciones"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-
-
+    <!-- Lista de tareas en formato resumen -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerResumenEventos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/txtMonth"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

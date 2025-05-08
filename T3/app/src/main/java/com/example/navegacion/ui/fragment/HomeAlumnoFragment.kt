@@ -30,7 +30,7 @@ class HomeAlumnoFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+   /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.menuButton.setOnClickListener {
@@ -48,7 +48,36 @@ class HomeAlumnoFragment : Fragment() {
                 .take(5)
             resumenAdapter.updateEventos(eventosOrdenados)
         }
-    }
+    }*/
+   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+       super.onViewCreated(view, savedInstanceState)
+
+       // Botón para ver notificaciones pendientes
+       binding.btnNotificaciones.setOnClickListener {
+           findNavController().navigate(R.id.action_homeAlumnoFragment_to_notificacionesFragment)
+       }
+
+       // Menú contextual (popup)
+       binding.menuButton.setOnClickListener {
+           showPopupMenu(it)
+       }
+
+       // Configurar RecyclerView
+       setupRecyclerView()
+
+       // Cargar eventos del alumno
+       val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
+       calendarioViewModel.cargarEventosAlumno(uid)
+
+       // Observar eventos y mostrarlos
+       calendarioViewModel.eventosAlumno.observe(viewLifecycleOwner) { lista ->
+           val eventosOrdenados = lista
+               .sortedBy { it.fecha }
+               .take(5)
+           resumenAdapter.updateEventos(eventosOrdenados)
+       }
+   }
+
 
     private fun setupRecyclerView() {
         resumenAdapter = ResumenEventosAdapter(mutableListOf()) { evento ->
