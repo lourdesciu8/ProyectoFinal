@@ -41,7 +41,7 @@ android {
 
 dependencies {
     implementation(libs.view)
-
+    implementation (libs.mpandroidchart)//graficos
     implementation("com.kizitonwose.calendar:view:2.6.2")
     // Firebase Authentication
     implementation("com.google.firebase:firebase-auth-ktx")
