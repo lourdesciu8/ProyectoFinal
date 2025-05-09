@@ -9,4 +9,3 @@ class DayViewContainer(view: View) : ViewContainer(view) {
     val textView: TextView = view.findViewById(R.id.dayText)
     lateinit var day: CalendarDay
 }
-

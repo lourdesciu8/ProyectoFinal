@@ -8,4 +8,3 @@
     android:textColor="@android:color/black"
     android:textSize="14sp"
     android:background="@drawable/circle_default"/>
-
