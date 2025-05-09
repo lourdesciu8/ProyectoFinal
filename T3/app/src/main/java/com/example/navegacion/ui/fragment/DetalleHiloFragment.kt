@@ -88,7 +88,8 @@ class DetalleHiloFragment : Fragment() {
         binding.rvMensajes.layoutManager = lm
 
         // Adapter con el mapa de nombres
-        adapter = MensajesAdapter(listaMensajes, userMap)
+        adapter = MensajesAdapter(listaMensajes,
+            userMap)
         binding.rvMensajes.adapter = adapter
 
         // Escucha mensajes en tiempo real

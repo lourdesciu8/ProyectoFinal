@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_homeAlumnoFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeAlumnoFragment_to_notificacionesFragment"
+            app:destination="@id/notificacionesFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeProfesorFragment"
@@ -168,5 +171,14 @@
         android:name="com.example.navegacion.ui.fragment.DetalleHiloFragment"
         android:label="Detalle del Hilo"
         tools:layout="@layout/fragment_detalle_hilo" />
+    <fragment
+        android:id="@+id/notificacionesFragment"
+        android:name="com.example.navegacion.ui.fragment.NotificacionesFragment"
+        android:label="NotificacionesFragment" >
+        <action
+            android:id="@+id/action_notificacionesFragment_to_homeAlumnoFragment"
+            app:destination="@id/homeAlumnoFragment" />
+    </fragment>
+
 
 </navigation>

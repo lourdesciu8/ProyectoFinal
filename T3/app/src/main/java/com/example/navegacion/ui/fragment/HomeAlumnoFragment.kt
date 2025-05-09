@@ -1,6 +1,3 @@
-
-
-
 package com.example.navegacion.ui.fragment
 
 import android.graphics.Color
@@ -16,24 +13,23 @@ import com.example.navegacion.R
 import com.example.navegacion.databinding.FragmentHomealumnoBinding
 import com.example.navegacion.ui.adapter.ResumenEventosAdapter
 import com.example.navegacion.ui.model.Calificacion
+import com.example.navegacion.ui.viewmodel.CalendarioViewModel
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.example.navegacion.ui.utils.DecimalValueFormatter
 
 class HomeAlumnoFragment : Fragment() {
 
     private var _binding: FragmentHomealumnoBinding? = null
     private val binding get() = _binding!!
+    private val calendarioViewModel: CalendarioViewModel by activityViewModels()
+    private lateinit var resumenAdapter: ResumenEventosAdapter
 
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomealumnoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,12 +37,39 @@ class HomeAlumnoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        cargarNotasPorModuloYMostrarBarras()
-
+        binding.btnNotificaciones.setOnClickListener {
+            findNavController().navigate(R.id.action_homeAlumnoFragment_to_notificacionesFragment)
+        }
 
         binding.menuButton.setOnClickListener {
             showPopupMenu(it)
+        }
+
+        setupRecyclerView()
+
+        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        calendarioViewModel.cargarEventosAlumno(uid)
+        calendarioViewModel.eventosAlumno.observe(viewLifecycleOwner) { lista ->
+            val eventosOrdenados = lista
+                .sortedBy { it.fecha }
+                .take(5)
+            resumenAdapter.updateEventos(eventosOrdenados)
+        }
+
+        cargarNotasPorModuloYMostrarBarras()
+    }
+
+    private fun setupRecyclerView() {
+        resumenAdapter = ResumenEventosAdapter(mutableListOf()) { evento ->
+            val bundle = Bundle().apply {
+                putLong("fechaSeleccionada", evento.fecha ?: 0L)
+            }
+            findNavController().navigate(R.id.calendarioAlumnoFragment, bundle)
+        }
+
+        binding.recyclerResumenEventos.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = resumenAdapter
         }
     }
 
@@ -82,8 +105,6 @@ class HomeAlumnoFragment : Fragment() {
 
                 mostrarGraficoBarras(entries, modulos)
             }
-
-
 
             override fun onCancelled(error: DatabaseError) {}
         })
@@ -121,7 +142,7 @@ class HomeAlumnoFragment : Fragment() {
             setFitBars(true)
 
             xAxis.apply {
-                xAxis.setDrawLabels(false)
+                setDrawLabels(false)
                 valueFormatter = IndexAxisValueFormatter(labels)
                 granularity = 1f
                 isGranularityEnabled = true
@@ -194,6 +215,7 @@ class HomeAlumnoFragment : Fragment() {
                 else -> false
             }
         }
+
         popupMenu.show()
     }
 
@@ -203,8 +225,3 @@ class HomeAlumnoFragment : Fragment() {
     }
 }
 
-class DecimalValueFormatter : ValueFormatter() {
-    override fun getFormattedValue(value: Float): String {
-        return String.format("%.1f", value)
-    }
-}
