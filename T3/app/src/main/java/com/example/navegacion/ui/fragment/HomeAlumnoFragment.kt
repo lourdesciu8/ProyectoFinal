@@ -16,7 +16,6 @@ import com.example.navegacion.R
 import com.example.navegacion.databinding.FragmentHomealumnoBinding
 import com.example.navegacion.ui.adapter.ResumenEventosAdapter
 import com.example.navegacion.ui.model.Calificacion
-import com.example.navegacion.ui.viewmodel.CalendarioViewModel
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.data.*
@@ -29,9 +28,8 @@ class HomeAlumnoFragment : Fragment() {
 
     private var _binding: FragmentHomealumnoBinding? = null
     private val binding get() = _binding!!
-    private val calendarioViewModel: CalendarioViewModel by activityViewModels()
 
-    private lateinit var resumenAdapter: ResumenEventosAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -43,52 +41,12 @@ class HomeAlumnoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupRecyclerView()
+
         cargarNotasPorModuloYMostrarBarras()
 
-        calendarioViewModel.obtenerModuloDelProfesor { modulo ->
-            if (modulo != null) {
-                calendarioViewModel.cargarEventosDesdeFirebase()
-                calendarioViewModel.cargarEventosModuloDesdeFirebase(modulo)
-                observarEventosCombinados()
-            }
-        }
 
         binding.menuButton.setOnClickListener {
             showPopupMenu(it)
-        }
-    }
-
-    private fun setupRecyclerView() {
-        resumenAdapter = ResumenEventosAdapter(mutableListOf()) { evento ->
-            val bundle = Bundle().apply {
-                putLong("fechaSeleccionada", evento.timestamp ?: 0L)
-            }
-            findNavController().navigate(R.id.calendarioAlumnoFragment, bundle)
-        }
-
-        binding.recyclerResumenEventos.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = resumenAdapter
-        }
-    }
-
-    private fun observarEventosCombinados() {
-        calendarioViewModel.obtenerEventos().observe(viewLifecycleOwner) { eventosUsuario ->
-            calendarioViewModel.obtenerEventosModulo().observe(viewLifecycleOwner) { eventosModulo ->
-                val listaUsuario = eventosUsuario.flatMap { (fecha, lista) ->
-                    lista.map { it.copy(timestamp = fecha) }
-                }
-                val listaModulo = eventosModulo.flatMap { (fecha, lista) ->
-                    lista.map { it.copy(timestamp = fecha) }
-                }
-
-                val todosEventos = (listaUsuario + listaModulo)
-                    .sortedBy { it.timestamp }
-                    .take(5)
-
-                resumenAdapter.updateEventos(todosEventos)
-            }
         }
     }
 
