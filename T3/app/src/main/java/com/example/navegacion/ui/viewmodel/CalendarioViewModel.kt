@@ -139,6 +139,23 @@ class CalendarioViewModel : ViewModel() {
         })
     }
 
+    fun obtenerModuloDelProfesorNombre(callback: (String?) -> Unit) {
+        val uid = auth.currentUser?.uid ?: return callback(null)
+        val ref = database.reference.child("modulos")
+
+        ref.get().addOnSuccessListener { snapshot ->
+            for (moduloSnap in snapshot.children) {
+                val profesoresSnap = moduloSnap.child("Profesores")
+                if (profesoresSnap.hasChild(uid)) {
+                    val nombreModulo = moduloSnap.child("nombre").getValue(String::class.java)
+                    callback(nombreModulo) // ← Devuelve el valor del campo "nombre"
+                    return@addOnSuccessListener
+                }
+            }
+            callback(null)
+        }
+    }
+
     fun obtenerModuloDelProfesor(callback: (String?) -> Unit) {
         val uid = auth.currentUser?.uid ?: return callback(null)
         val ref = database.reference.child("modulos")
@@ -154,6 +171,9 @@ class CalendarioViewModel : ViewModel() {
             callback(null)
         }
     }
+
+
+
 }
 
 

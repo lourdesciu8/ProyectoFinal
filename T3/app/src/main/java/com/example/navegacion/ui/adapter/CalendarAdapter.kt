@@ -28,7 +28,7 @@ class CalendarAdapter(
 
         // Si el día tiene eventos, cambiar el color de fondo
         if (hasEvent) {
-            holder.dayText.setBackgroundResource(R.drawable.circle_background)
+            holder.dayText.setBackgroundResource(R.drawable.circle_personal)
         }
 
         // Manejar clic en el día para navegar a CalendarioFragment
