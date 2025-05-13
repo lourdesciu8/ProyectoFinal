@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="@drawable/bg_home_gradient"
     android:padding="16dp"
     android:scrollbars="vertical"
     xmlns:tools="http://schemas.android.com/tools">

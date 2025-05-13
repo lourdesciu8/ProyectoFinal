@@ -1,15 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="colorApp">#3998a9</color>
-    <!-- paleta definida entre los tres -->
-    <color name="cal_poly_green">#26532B</color>
-    <color name="shamrock_green">#399E5A</color>    <!-- colorApp -->
-    <color name="verdigris">#5ACBC9</color>
-    <color name="turquoise">#63E2C6</color>
-    <color name="aqua">#6EF9F5</color>
-    <color name="red">#F25A5A</color>
-    <color name="orange">#E69A1C</color>
-    <color name="green">#A5D6A7</color>
+    <!-- Neutros -->
+    <color name="black">#2C2C2C</color>
+    <color name="white">#FFFFFF</color>
+    <color name="background">#F2F8FC</color> <!-- fondo general suave -->
+
+    <!-- Tonos principales en armonía azul -->
+    <color name="colorApp">#3998a9</color>         <!-- base app azul -->
+    <color name="primaryLight">#7EC6E3</color>     <!-- más claro -->
+    <color name="primaryLighter">#BFE6F7</color>   <!-- muy suave/pastel -->
+    <color name="primaryDark">#2C7BA3</color>      <!-- más profundo -->
+    <color name="primaryDarker">#1D5678</color>    <!-- muy oscuro -->
+
+    <!-- Tonos complementarios fríos -->
+    <color name="accentCool">#6D9EC1</color>       <!-- azul grisáceo -->
+    <color name="accentMuted">#A0C4DB</color>      <!-- azul gris claro -->
+
+    <!-- Tonos de alerta pastel -->
+    <color name="red">#FF7C7C</color>              <!-- rojo pastel -->
+    <color name="orange">#FFC78A</color>           <!-- naranja suave -->
+    <color name="green">#A3E4C3</color>            <!-- verde menta pastel -->
+
+    <!-- Texto -->
+    <color name="colorTextPrimary">#1F1F1F</color>
+    <color name="colorTextSecondary">#4B4B4B</color>
+
+    <!-- Fondo de componentes -->
+    <color name="colorBackground">#F2F8FC</color>  <!-- coincide con fondo general -->
 </resources>

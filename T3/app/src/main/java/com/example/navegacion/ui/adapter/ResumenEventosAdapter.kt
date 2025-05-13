@@ -101,7 +101,7 @@ class ResumenEventosAdapter(
         }
         holder.icono.setImageResource(iconoRes)
 
-        holder.origen.text = if (evento.esPersonal) "(Personal)" else "(Profesor)"
+        holder.origen.text = if (evento.esPersonal) "(Personal)" else "(Asignado)"
 
         holder.itemView.setOnClickListener { onClick(evento) }
     }

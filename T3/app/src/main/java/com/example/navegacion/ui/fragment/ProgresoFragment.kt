@@ -67,12 +67,13 @@ class ProgresoFragment : Fragment() {
     //ya que tenemos una paleta de colores la he usado de mas oscuro a mas claro de suspenso a 10
     private fun obtenerColorNota(context: Context, nota: Float): Int {
         return when {
-            nota < 0f -> ContextCompat.getColor(context, R.color.cal_poly_green)
-            nota < 5f -> ContextCompat.getColor(context, R.color.shamrock_green)
-            nota < 6.5f -> ContextCompat.getColor(context, R.color.verdigris)
-            nota < 9.5f -> ContextCompat.getColor(context, R.color.turquoise)
-            else -> ContextCompat.getColor(context, R.color.aqua)
+            nota < 0f -> ContextCompat.getColor(context, R.color.primaryDark)       // #2B7683 – tono profundo
+            nota < 5f -> ContextCompat.getColor(context, R.color.accentMuted)       // #A99D39 – mostaza envejecido
+            nota < 6.5f -> ContextCompat.getColor(context, R.color.orange)      // #A95739 – terracota
+            nota < 9.5f -> ContextCompat.getColor(context, R.color.primaryLight)    // #5BB3C2 – tono más claro del principal
+            else -> ContextCompat.getColor(context, R.color.colorApp)               // #3998A9 – color principal
         }
+
     }
     private fun mostrarBarChartExamenes(lista: List<Calificacion>) {
         val examenes = lista.filter { it.tipo == "Examen" }

@@ -73,7 +73,7 @@ class CalendarioViewModel : ViewModel() {
     private val _eventosProfesor = MutableLiveData<List<Evento>>()
     val eventosProfesor: LiveData<List<Evento>> get() = _eventosProfesor
 
-    fun cargarEventosAlumno(uid: String) {
+    /*fun cargarEventosAlumno(uid: String) {
         val ref = database.reference.child("eventos")
 
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -92,7 +92,31 @@ class CalendarioViewModel : ViewModel() {
                 _eventosAlumno.postValue(emptyList())
             }
         })
+    }*/
+    fun cargarEventosAlumno(uid: String) {
+        val ref = database.reference.child("eventos")
+
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val lista = mutableListOf<Evento>()
+                for (eventoSnap in snapshot.children) {
+                    val evento = eventoSnap.getValue(Evento::class.java)
+                    if (evento != null && (
+                                evento.asignadoA?.containsKey(uid) == true ||
+                                        (evento.esPersonal == true && evento.creadoPor == uid)
+                                )) {
+                        lista.add(evento.copy(id = eventoSnap.key))
+                    }
+                }
+                _eventosAlumno.postValue(lista)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                _eventosAlumno.postValue(emptyList())
+            }
+        })
     }
+
 
     fun cargarEventosProfesor(uid: String) {
         val ref = database.reference.child("eventos")
