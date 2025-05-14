@@ -1,4 +1,3 @@
-
 package com.example.navegacion.ui.fragment
 
 import android.app.AlertDialog
@@ -76,15 +75,6 @@ class CalendarioAlumnoFragment : Fragment() {
             }
         }
     }
-
-   /* private fun setupRecyclerView() {
-        eventosAdapter = EventosAdapter(
-            onEditar = { evento -> mostrarDialogoEvento(evento) },
-            onEliminar = { evento -> eliminarEvento(evento) }
-        )
-        binding.recyclerViewEventos.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewEventos.adapter = eventosAdapter
-    }*/
 
     private fun setupRecyclerView() {
         eventosAdapter = EventosAdapter(

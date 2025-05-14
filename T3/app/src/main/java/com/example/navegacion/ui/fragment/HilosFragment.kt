@@ -1,4 +1,3 @@
-// src/main/java/com/example/navegacion/ui/fragment/HilosFragment.kt
 package com.example.navegacion.ui.fragment
 
 import android.os.Bundle
