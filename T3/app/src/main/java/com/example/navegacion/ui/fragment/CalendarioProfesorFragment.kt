@@ -1,4 +1,3 @@
-
 package com.example.navegacion.ui.fragment
 
 import android.app.AlertDialog
@@ -9,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
@@ -128,11 +128,13 @@ class CalendarioProfesorFragment : Fragment() {
 
                 when {
                     eventos.isEmpty() -> textView.setBackgroundResource(R.drawable.circle_default)
+                    eventos.any { it.esPersonal } -> textView.setBackgroundResource(R.drawable.circle_personal)
                     eventos.any { it.tipo.equals("Tarea", true) } -> textView.setBackgroundResource(R.drawable.circle_tarea)
                     eventos.any { it.tipo.equals("Examen", true) } -> textView.setBackgroundResource(R.drawable.circle_examen)
                     else -> textView.setBackgroundResource(R.drawable.circle_otro)
                 }
             }
+
         }
     }
 
@@ -153,21 +155,34 @@ class CalendarioProfesorFragment : Fragment() {
         val editTitulo = dialogView.findViewById<EditText>(R.id.editTitulo)
         val editDescripcion = dialogView.findViewById<EditText>(R.id.editDescripcion)
         val spinnerTipo = dialogView.findViewById<Spinner>(R.id.spinnerTipo)
+        val checkPersonal = dialogView.findViewById<CheckBox>(R.id.checkPersonal)
 
-        val adapterSpinner = ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.tipos_evento,
-            android.R.layout.simple_spinner_item
-        )
-        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerTipo.adapter = adapterSpinner
+        fun configurarSpinner(esPersonal: Boolean) {
+            val arrayId = if (esPersonal) R.array.tipos_evento_personal else R.array.tipos_evento
+            val adapterSpinner = ArrayAdapter.createFromResource(
+                requireContext(),
+                arrayId,
+                android.R.layout.simple_spinner_item
+            )
+            adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerTipo.adapter = adapterSpinner
+
+            eventoAEditar?.let {
+                val tipoIndex = adapterSpinner.getPosition(it.tipo)
+                spinnerTipo.setSelection(tipoIndex)
+            }
+        }
+
+        checkPersonal.setOnCheckedChangeListener { _, isChecked ->
+            configurarSpinner(isChecked)
+        }
 
         eventoAEditar?.let {
             editTitulo.setText(it.titulo)
             editDescripcion.setText(it.descripcion)
-            val tipoIndex = adapterSpinner.getPosition(it.tipo)
-            spinnerTipo.setSelection(tipoIndex)
-        }
+            checkPersonal.isChecked = it.esPersonal
+            configurarSpinner(it.esPersonal)
+        } ?: configurarSpinner(false)
 
         AlertDialog.Builder(requireContext())
             .setTitle(if (eventoAEditar == null) "Nuevo Evento" else "Editar Evento")
@@ -176,27 +191,24 @@ class CalendarioProfesorFragment : Fragment() {
                 val titulo = editTitulo.text.toString()
                 val descripcion = editDescripcion.text.toString()
                 val tipo = spinnerTipo.selectedItem.toString()
+                val esPersonal = checkPersonal.isChecked
 
                 moduloActual?.let { modulo ->
-                    val refAlumnos = FirebaseDatabase.getInstance().reference
-                        .child("modulos").child(modulo).child("Alumnos")
+                    val ref = FirebaseDatabase.getInstance().reference.child("eventos")
 
-                    refAlumnos.get().addOnSuccessListener { snapshot ->
-                        val asignados = snapshot.children.associate { it.key!! to true }
-
+                    if (esPersonal) {
                         val evento = Evento(
                             titulo = titulo,
                             descripcion = descripcion,
                             tipo = tipo,
                             fecha = selectedDate,
                             creadoPor = uid,
-                            esPersonal = false,
+                            esPersonal = true,
                             modulo = modulo,
-                            asignadoA = asignados,
+                            asignadoA = mapOf(uid!! to true),
                             id = eventoAEditar?.id
                         )
 
-                        val ref = FirebaseDatabase.getInstance().reference.child("eventos")
                         if (eventoAEditar == null) {
                             val newRef = ref.push()
                             newRef.setValue(evento.copy(id = newRef.key))
@@ -204,22 +216,50 @@ class CalendarioProfesorFragment : Fragment() {
                             ref.child(evento.id!!).setValue(evento)
                         }
 
-                        // Aquí agregamos las notificaciones
-                        val notifRef = FirebaseDatabase.getInstance().reference.child("notificaciones")
-                        asignados.keys.forEach { alumnoUid ->
-                            val nuevaNotificacion = mapOf(
-                                "titulo" to "Nuevo $tipo: $titulo",
-                                "cuerpo" to descripcion
-                            )
-                            notifRef.child(alumnoUid).push().setValue(nuevaNotificacion)
-                        }
-
                         calendarioViewModel.cargarEventosProfesor(uid!!)
                         abrirCalendarioConEvento(titulo, descripcion, selectedDate)
+
+                    } else {
+                        val refAlumnos = FirebaseDatabase.getInstance().reference
+                            .child("modulos").child(modulo).child("Alumnos")
+
+                        refAlumnos.get().addOnSuccessListener { snapshot ->
+                            val asignados = snapshot.children.associate { it.key!! to true }
+
+                            val evento = Evento(
+                                titulo = titulo,
+                                descripcion = descripcion,
+                                tipo = tipo,
+                                fecha = selectedDate,
+                                creadoPor = uid,
+                                esPersonal = false,
+                                modulo = modulo,
+                                asignadoA = asignados,
+                                id = eventoAEditar?.id
+                            )
+
+                            if (eventoAEditar == null) {
+                                val newRef = ref.push()
+                                newRef.setValue(evento.copy(id = newRef.key))
+                            } else {
+                                ref.child(evento.id!!).setValue(evento)
+                            }
+
+                            val notifRef = FirebaseDatabase.getInstance().reference.child("notificaciones")
+                            asignados.keys.forEach { alumnoUid ->
+                                val nuevaNotificacion = mapOf(
+                                    "titulo" to "Nuevo $tipo: $titulo",
+                                    "cuerpo" to descripcion
+                                )
+                                notifRef.child(alumnoUid).push().setValue(nuevaNotificacion)
+                            }
+
+                            calendarioViewModel.cargarEventosProfesor(uid!!)
+                            abrirCalendarioConEvento(titulo, descripcion, selectedDate)
+                        }
                     }
                 }
             }
-
             .setNegativeButton("Cancelar", null)
             .show()
     }
@@ -248,3 +288,4 @@ class CalendarioProfesorFragment : Fragment() {
         _binding = null
     }
 }
+

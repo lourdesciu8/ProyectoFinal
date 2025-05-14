@@ -1,4 +1,3 @@
-
 package com.example.navegacion.ui.fragment
 
 import android.app.AlertDialog
@@ -79,12 +78,27 @@ class CalendarioAlumnoFragment : Fragment() {
 
     private fun setupRecyclerView() {
         eventosAdapter = EventosAdapter(
-            onEditar = { evento -> mostrarDialogoEvento(evento) },
-            onEliminar = { evento -> eliminarEvento(evento) }
+            onEditar = { evento ->
+                // Solo permitir editar si fue creado por el alumno
+                if (evento.creadoPor == uid) {
+                    mostrarDialogoEvento(evento)
+                } else {
+                    Toast.makeText(requireContext(), "No puedes editar eventos asignados por el profesor", Toast.LENGTH_SHORT).show()
+                }
+            },
+            onEliminar = { evento ->
+                // Solo permitir eliminar si fue creado por el alumno
+                if (evento.creadoPor == uid) {
+                    eliminarEvento(evento)
+                } else {
+                    Toast.makeText(requireContext(), "No puedes eliminar eventos asignados por el profesor", Toast.LENGTH_SHORT).show()
+                }
+            }
         )
         binding.recyclerViewEventos.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewEventos.adapter = eventosAdapter
     }
+
 
     private fun setupCalendar() {
         val currentMonth = YearMonth.now()

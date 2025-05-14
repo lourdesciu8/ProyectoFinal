@@ -13,6 +13,7 @@ import com.example.navegacion.R
 import com.example.navegacion.databinding.FragmentHomealumnoBinding
 import com.example.navegacion.ui.adapter.ResumenEventosAdapter
 import com.example.navegacion.ui.model.Calificacion
+import com.example.navegacion.ui.model.Evento
 import com.example.navegacion.ui.viewmodel.CalendarioViewModel
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.LegendEntry
@@ -50,7 +51,11 @@ class HomeAlumnoFragment : Fragment() {
         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
         calendarioViewModel.cargarEventosAlumno(uid)
         calendarioViewModel.eventosAlumno.observe(viewLifecycleOwner) { lista ->
-            val eventosOrdenados = lista
+            // Filtrar eventos asignados al alumno y también los que él mismo creó como personales
+            val eventosFiltrados = lista.filter {
+                it.asignadoA?.containsKey(uid) == true || (it.creadoPor == uid && it.esPersonal == true)
+            }
+            val eventosOrdenados = eventosFiltrados
                 .sortedBy { it.fecha }
                 .take(5)
             resumenAdapter.updateEventos(eventosOrdenados)
@@ -114,12 +119,13 @@ class HomeAlumnoFragment : Fragment() {
         val context = requireContext()
 
         val moduloColors = listOf(
-            ContextCompat.getColor(context, R.color.cal_poly_green),
-            ContextCompat.getColor(context, R.color.shamrock_green),
-            ContextCompat.getColor(context, R.color.verdigris),
-            ContextCompat.getColor(context, R.color.turquoise),
-            ContextCompat.getColor(context, R.color.aqua)
+            ContextCompat.getColor(context, R.color.primaryLight),       // #5BB3C2
+            ContextCompat.getColor(context, R.color.primaryDarker),     // #A7DBE5
+            ContextCompat.getColor(context, R.color.primaryDark),        // #2B7683
+            ContextCompat.getColor(context, R.color.orange),         // #A95739
+            ContextCompat.getColor(context, R.color.colorTextSecondary)         // #A99D39
         )
+
 
         val usedColors = labels.mapIndexed { index, _ ->
             moduloColors.getOrElse(index) { Color.GRAY }
