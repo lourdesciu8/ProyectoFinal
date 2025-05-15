@@ -36,7 +36,8 @@
     <fragment
         android:id="@+id/homeAlumnoFragment"
         android:name="com.example.navegacion.ui.fragment.HomeAlumnoFragment"
-        android:label="HomeAlumnoFragment" >
+        android:label="HomeAlumnoFragment"
+        tools:layout="@layout/fragment_homealumno">
         <action
             android:id="@+id/action_homeAlumno_to_hilosFragment"
             app:destination="@id/hilosFragment" />
@@ -59,7 +60,8 @@
     <fragment
         android:id="@+id/homeProfesorFragment"
         android:name="com.example.navegacion.ui.fragment.HomeProfesorFragment"
-        android:label="HomeProfesorFragment" >
+        android:label="HomeProfesorFragment"
+        tools:layout="@layout/fragment_homeprofesor">
         <action
             android:id="@+id/action_homeProfesor_to_hilosFragment"
             app:destination="@id/hilosFragment" />
@@ -79,7 +81,8 @@
     <fragment
         android:id="@+id/calendarioAlumnoFragment"
         android:name="com.example.navegacion.ui.fragment.CalendarioAlumnoFragment"
-        android:label="CalendarioAlumnoFragment" >
+        android:label="CalendarioAlumnoFragment"
+        tools:layout="@layout/fragment_calendarioalumno">
         <action
             android:id="@+id/action_calendarioAlumnoFragment_to_homeAlumnoFragment"
             app:destination="@id/homeAlumnoFragment" />
@@ -87,7 +90,8 @@
     <fragment
         android:id="@+id/calificacionesAlumnoFragmnet"
         android:name="com.example.navegacion.ui.fragment.CalificacionesAlumnoFragment"
-        android:label="CalificacionesAlumnoFragmnet" >
+        android:label="CalificacionesAlumnoFragmnet"
+        tools:layout="@layout/fragment_calificaciones_alumno">
         <action
             android:id="@+id/action_calificacionesAlumnoFragmnet_to_homeAlumnoFragment"
             app:destination="@id/homeAlumnoFragment" />
@@ -95,7 +99,8 @@
     <fragment
         android:id="@+id/temarioAlumnoFragment"
         android:name="com.example.navegacion.ui.fragment.TemarioAlumnoFragment"
-        android:label="TemarioAlumnoFragment" >
+        android:label="TemarioAlumnoFragment"
+        tools:layout="@layout/fragment_temarioalumno">
         <action
             android:id="@+id/action_temarioAlumnoFragment_to_homeAlumnoFragment"
             app:destination="@id/homeAlumnoFragment" />
@@ -103,7 +108,8 @@
     <fragment
         android:id="@+id/progresoFragment"
         android:name="com.example.navegacion.ui.fragment.ProgresoFragment"
-        android:label="ProgresoFragment" >
+        android:label="ProgresoFragment"
+        tools:layout="@layout/fragment_progreso">
         <action
             android:id="@+id/action_progresoFragment_to_homeAlumnoFragment"
             app:destination="@id/homeAlumnoFragment" />
@@ -111,7 +117,8 @@
     <fragment
         android:id="@+id/calendarioProfesorFragment"
         android:name="com.example.navegacion.ui.fragment.CalendarioProfesorFragment"
-        android:label="CalendarioProfesorFragment" >
+        android:label="CalendarioProfesorFragment"
+        tools:layout="@layout/fragment_calendarioprofesor">
         <action
             android:id="@+id/action_calendarioProfesorFragment_to_homeProfesorFragment"
             app:destination="@id/homeProfesorFragment" />
@@ -119,7 +126,8 @@
     <fragment
         android:id="@+id/calificacionesProfesorFragment"
         android:name="com.example.navegacion.ui.fragment.CalificacionesProfesorFragment"
-        android:label="CalificacionesProfesorFragment" >
+        android:label="CalificacionesProfesorFragment"
+        tools:layout="@layout/fragment_calificaciones_profesor">
         <action
             android:id="@+id/action_calificacionesProfesorFragment_to_homeProfesorFragment"
             app:destination="@id/homeProfesorFragment" />
@@ -127,7 +135,8 @@
     <fragment
         android:id="@+id/temarioProfesorFragment"
         android:name="com.example.navegacion.ui.fragment.TemarioProfesorFragment"
-        android:label="TemarioProfesorFragment" >
+        android:label="TemarioProfesorFragment"
+        tools:layout="@layout/fragment_temarioprofesor">
         <action
             android:id="@+id/action_temarioProfesorFragment_to_homeProfesorFragment"
             app:destination="@id/homeProfesorFragment" />
@@ -174,7 +183,8 @@
     <fragment
         android:id="@+id/notificacionesFragment"
         android:name="com.example.navegacion.ui.fragment.NotificacionesFragment"
-        android:label="NotificacionesFragment" >
+        android:label="NotificacionesFragment"
+        tools:layout="@layout/fragment_notificaciones">
         <action
             android:id="@+id/action_notificacionesFragment_to_homeAlumnoFragment"
             app:destination="@id/homeAlumnoFragment" />
