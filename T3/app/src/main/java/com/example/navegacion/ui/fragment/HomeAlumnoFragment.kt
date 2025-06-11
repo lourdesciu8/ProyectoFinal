@@ -149,13 +149,10 @@ class HomeAlumnoFragment : Fragment() {
 
             xAxis.apply {
                 setDrawLabels(false)
-                valueFormatter = IndexAxisValueFormatter(labels)
                 granularity = 1f
                 isGranularityEnabled = true
                 setDrawGridLines(false)
                 position = com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM
-                labelRotationAngle = -30f
-                textSize = 12f
             }
 
             axisLeft.axisMinimum = 0f
