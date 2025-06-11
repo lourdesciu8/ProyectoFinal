@@ -111,13 +111,11 @@ class ProgresoFragment : Fragment() {
             setFitBars(true)
 
             xAxis.apply {
-                valueFormatter = IndexAxisValueFormatter(labels)
+                setDrawLabels(false)
                 granularity = 1f
                 isGranularityEnabled = true
                 setDrawGridLines(false)
                 position = com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM
-                labelRotationAngle = 0f
-                textSize = 12f
             }
             legend.apply {
                 verticalAlignment = Legend.LegendVerticalAlignment.TOP
@@ -187,13 +185,11 @@ class ProgresoFragment : Fragment() {
             setFitBars(true)
 
             xAxis.apply {
-                valueFormatter = IndexAxisValueFormatter(labels)
+                setDrawLabels(false)
                 granularity = 1f
                 isGranularityEnabled = true
                 setDrawGridLines(false)
                 position = com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM
-                labelRotationAngle = 0f
-                textSize = 12f
             }
             legend.apply {
                 verticalAlignment = Legend.LegendVerticalAlignment.TOP
